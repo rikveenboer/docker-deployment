@@ -1,0 +1,3 @@
+#!/bin/bash
+socat TCP-LISTEN:8888,fork TCP:host:8888 &
+socat TCP-LISTEN:80,fork,crlf SYSTEM:"echo HTTP/1.0 200; echo Content-Type: text/plain; echo;" &

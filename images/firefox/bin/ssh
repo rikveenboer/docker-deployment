@@ -1,0 +1,24 @@
+ARGS=""
+DIR=`dirname $0`
+DIR=`readlink -e $DIR`
+BASE=`basename $DIR`
+IFS='/' read -ra ADDR <<< "$DIR"
+CONTAINER=${ADDR[-2]}
+ID=`docker ps --no-trunc | grep $CONTAINER: | cut -d' ' -f1`
+if [ -n "$ID" ]; then
+    IP=`docker inspect --format '{{ .NetworkSettings.IPAddress }}' $ID`
+    COMMAND="ssh -X -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i id_rsa $ARGS root@$IP"
+    if [ ! -e id_rsa ]; then
+        docker cp $ID:/opt/id_rsa .
+    fi
+    if [ ! -z "$1" ] && [ "$1" == "-l" ]; then
+        DISPLAY=:0
+        chmod 0666 id_rsa
+        su user -c "$COMMAND \"$2\""
+    else
+        chmod 0600 id_rsa
+        eval "$COMMAND \"$1\""
+    fi
+else
+    echo "Container is not running."
+fi
