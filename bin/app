@@ -1,0 +1,4 @@
+DIR=`pwd`
+cd /opt/docker/images/$1/
+bin/app "$2"
+cd $DIR

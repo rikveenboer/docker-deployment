@@ -1,0 +1,4 @@
+DIR=`pwd`
+cd /opt/docker/images/$1/
+bin/ssh "$2" "$3"
+cd $DIR

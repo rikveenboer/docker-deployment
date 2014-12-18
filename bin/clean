@@ -1,0 +1,4 @@
+IDS=`comm -3 <(docker ps -a -q | sort) <(docker ps -q | sort)`
+if [[ ! -z "$IDS" ]]; then
+    docker rm $IDS
+fi

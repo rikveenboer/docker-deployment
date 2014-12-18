@@ -1,0 +1,31 @@
+#!/bin/bash
+# Arguments:
+# $1 = redirected ? -t : <image>
+# $2 = redirected ? <image> : <mode>
+# $3 = redirected ? <options> : <command>
+# When redirected:
+# $4 = <mode>
+# $5 = <command>
+if [ -n "$1" ] && [ $1 == "-t" ]; then
+    HOST_ADDR=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{print $1}'`
+    PARAMS="--rm -e HOST_ADDR=$HOST_ADDR $3 --name $2"
+    if [ -n "$4" ] && [ $4 == "-i" ]; then
+        # Run without services, provide shell
+        docker run $PARAMS -i -t $2 bash
+    elif [ -n "$4" ] && [ $4 == "-x" ]; then
+        # Run with services, provide shell
+        docker run $PARAMS -i -t $2 /opt/init -- bash -l
+    elif [ -n "$4" ] && [ $4 == "-c" ] && [ -n "$5" ]; then
+        # Run with services, provide shell
+        docker run $PARAMS -i -t $2 /opt/init -- $5
+    elif [ -n "$4" ] && [ $4 == "-w" ]; then
+        # Run without services
+        docker run $PARAMS $2
+    else
+        # Run with services
+        docker run $PARAMS $2 /opt/init
+    fi
+else
+    /opt/docker/bin/clean # > /dev/null 2>&1
+    /opt/docker/images/$1/bin/run $2 $3
+fi
