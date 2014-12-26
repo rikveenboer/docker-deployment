@@ -1,4 +1,0 @@
-#!/bin/bash
-echo "$HOST_ADDR host" >> /tmp/hosts
-mkdir -p `dirname $REDIS_LOG` $REDIS_DATA
-/opt/redis-$VERSION/src/redis-server $REDIS_CONFIG
