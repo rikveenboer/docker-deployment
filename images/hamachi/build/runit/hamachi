@@ -1,4 +1,0 @@
-#!/bin/sh
-/opt/logmein-hamachi/bin/hamachid -c $HAMACHI_DATA
-strace -qqe '' -p `pgrep hamachid`
-/host/bin/proxy
