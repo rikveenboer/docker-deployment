@@ -1,14 +1,54 @@
-include $(wildcard /opt/docker/build/make/*.mk)
-BASE = /opt/docker/build
+HOME = $(DOCKER_HOME)
+BASE = $(HOME)/build
+DIR = $(HOME)/images/$(NAME)
+FILE = $(DIR)/Dockerfile
+FROM = ubuntu:trusty
+PORT = 8001
+MODE = minimal
+ARGS = --no-cache
+
+include $(wildcard $(HOME)/build/make/*.mk)
+
+define download
+	@echo 'RUN wget -q $(1) $$HOST_ADDR:$$HOST_PORT/$(2) $(3)' >> ${FILE}
+endef
+
+define execute
+	$(call download,-O -,$(1),| bash)
+endef
+
+define script
+	$(call execute,scripts/$(1).sh)
+endef
+
+define boot
+	$(call download,-O /opt/init.d/$(1)_$(2),boot/$(2).sh)
+endef
+
+define runit
+	@echo 'RUN mkdir -p /etc/service/$(1)' >> ${FILE}
+	$(call download,-O /etc/service/$(1)/run,runit/$(1))
+endef
 
 all: build bin service clean
 
-build:
-	cp $(BASE)/Dockerfile .
-	docker build -t $(NAME):$(VERSION) --rm .
+build: prepare
+	$(call script,cleanup)
+	@echo 'CMD ["/opt/init"]' >> ${FILE}
+	@$(shell cd ${BASE} && python -m SimpleHTTPServer $(PORT) > /dev/null &)
+	@docker build -t $(NAME):$(VERSION) --rm=true $(ARGS) ${DIR}
+	@kill -9 $(lsof -i tcp:8001 -t)
 
-directory:
-	@mkdir -p build/boot build/runit build/scripts
+prepare:
+	@echo FROM $(FROM) > ${FILE}
+	@echo ENV MODE $(MODE) >> ${FILE}
+	@$(eval HOST_ADDR := $(shell ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{print $$1}'))
+	@echo ENV HOST_ADDR $(HOST_ADDR) >> ${FILE}
+	@echo ENV HOST_PORT $(PORT) >> ${FILE}
+	@echo 'RUN apt-get install -y wget' >> ${FILE}
+	$(call download,-P /build,config,)
+	$(call download,-P /build,init)
+	$(call script,prepare)
 
 service:
 	@if test "${DEPENDS}" != ""; then \
@@ -23,6 +63,7 @@ service:
 	@mv init.conf /etc/init/docker-$(NAME).conf
 
 bin:
+	@rm -r bin
 	@mkdir -p bin
 	@ln -sf $(BASE)/bin/run bin
 	@ln -sf $(BASE)/bin/ssh bin
@@ -31,7 +72,7 @@ bin:
 	@sed -i "1iARGS=\"$(SSH)\"" bin/ssh
 
 clean:
-	@rm -f Dockerfile
+	@rm -f ${FILE}
 	@rm -rf build
 	@rm -rf id_rsa
 
