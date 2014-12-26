@@ -3,6 +3,7 @@ mkdir -p $BTSYNC_DATA
 if [ ! -e $BTSYNC_CONFIG ]; then
     mkdir -p `dirname $BTSYNC_CONFIG`
     /opt/btsync --dump-sample-config > $BTSYNC_CONFIG
+    sed -i 's,\("listening_port"\s*:\)\s*[0-9]\+,\1 5555,' $BTSYNC_CONFIG
     sed -i "s,\(\"storage_path\"\s*:\).*,\1 \"$BTSYNC_DATA\"\,," $BTSYNC_CONFIG
 fi
 /opt/btsync --nodaemon --config $BTSYNC_CONFIG
