@@ -4,9 +4,7 @@ source /build/config
 set -x
 
 ## Install cron daemon
-$minimal_apt_get_install cron
-mkdir -p /etc/service/cron
-mv /build/runit/cron /etc/service/cron/run
+apt_get_install_permanent cron
 
 ## Remove useless cron entries
 # Checks for lost+found and scans for mtab

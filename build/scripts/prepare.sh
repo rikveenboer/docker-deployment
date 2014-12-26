@@ -13,7 +13,9 @@ export INITRD=no
 mkdir -p /etc/container_environment
 echo -n no > /etc/container_environment/INITRD
 
-## Update package list
+## Enable Ubuntu Universe and Multiverse.
+sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
+sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
 apt-get update
 
 ## Fix some issues with APT packages
@@ -37,3 +39,6 @@ apt-get dist-upgrade -y --no-install-recommends
 ## Fix locale
 $minimal_apt_get_install language-pack-en
 locale-gen en_US
+
+## Create directory for boot scripts
+mkdir /opt/init.d/

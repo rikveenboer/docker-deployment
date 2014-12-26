@@ -6,8 +6,6 @@ set -x
 ## Install the SSH server
 $minimal_apt_get_install openssh-server
 mkdir /var/run/sshd
-mkdir -p /etc/service/sshd
-cp /build/runit/sshd /etc/service/sshd/run
 
 ## Install root key
 cd /opt
