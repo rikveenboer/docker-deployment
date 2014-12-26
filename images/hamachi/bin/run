@@ -1,7 +1,0 @@
-ARGS="--privileged -v /opt/docker/images/hamachi/fs:/host"
-DIR=`dirname $0`
-DIR=`readlink -e $DIR`
-BASE=`basename $DIR`
-IFS='/' read -ra ADDR <<< "$DIR"
-CONTAINER=${ADDR[-2]}
-/opt/docker/bin/run -t $CONTAINER "$ARGS" $1 "$2"

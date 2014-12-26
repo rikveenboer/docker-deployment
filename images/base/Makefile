@@ -1,4 +1,4 @@
-include /opt/docker/build/Makefile
+include $(DOCKER_HOME)/build/Makefile
 
 NAME = base
 VERSION = latest

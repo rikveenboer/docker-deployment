@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "$HOST_ADDR host" >> /tmp/hosts
+mkdir -p `dirname $REDIS_LOG` $REDIS_DATA
+/usr/sbin/mysqld

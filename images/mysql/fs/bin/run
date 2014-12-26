@@ -1,0 +1,18 @@
+#!/bin/bash
+set -m
+echo "$HOST_ADDR host" >> /tmp/hosts
+mkdir -p `dirname $MYSQL_LOG`
+if [ ! -d $MYSQL_DATA ]; then
+    mkdir `dirname $MYSQL_DATA`
+    cp /var/lib/mysql/ $MYSQL_DATA -R
+    chown mysql:mysql $MYSQL_DATA -R
+    MYSQL_SETUP=true
+fi
+/usr/bin/mysqld_safe --skip-syslog &
+if [[ -n "$MYSQL_SETUP" ]]; then
+    until [[ -n $(netstat -an | grep 3306) ]]; do
+        sleep 1
+    done
+    mysqladmin -u root password kreeft
+    fg
+fi
