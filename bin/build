@@ -1,4 +1,1 @@
-DIR=`pwd`
-cd /opt/docker/images/$1/
-make build
-cd $DIR
+make -f $DOCKER_HOME/images/$1/Makefile build
