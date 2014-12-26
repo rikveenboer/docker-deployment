@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+if [ -z "$GMRENDER_NAME" ]; then
+    /usr/local/bin/gmediarender
+else
+    /usr/local/bin/gmediarender -f $GMRENDER_NAME
+fi

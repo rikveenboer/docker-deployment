@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ ! -f $MINIDLNA_CONFIG ]; then
+    mkdir -p `dirname $$MINIDLNA_CONFIG`
+    cp /opt/minidlna-$MINIDLNA_VERSION/minidlna.conf $MINIDLNA_CONFIG
+fi
+mkdir -p `dirname $MINIDLNA_LOG`
+mkdir -p $MINIDLNA_DATA
+/usr/local/sbin/minidlnad -d -f $MINIDLNA_CONFIG >> $MINIDLNA_LOG
