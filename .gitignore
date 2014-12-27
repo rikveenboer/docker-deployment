@@ -1,1 +1,7 @@
-/images/*/fs/var/*
+/fs/*/var/*
+/tmp.txt
+/test/
+/images/*/Dockerfile
+maestro.yaml
+setup
+README.md
