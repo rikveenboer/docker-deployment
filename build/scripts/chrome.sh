@@ -4,7 +4,7 @@ source /build/config
 set -x
 
 ## Chrome dependencies
-$minimal_apt_get_install gconf-service libasound2 libatk1.0-0 libcairo2 libcap2 libcups2 libcurl3 libfontconfig1 libgdk-pixbuf2.0-0 libgtk2.0-0 libnspr4 libnss3 libpango1.0-0 librtmp0 libxss1 libxtst6 xdg-utils
+apt_get_install_permanent gconf-service libasound2 libatk1.0-0 libcairo2 libcap2 libcups2 libcurl3 libfontconfig1 libgdk-pixbuf2.0-0 libgtk2.0-0 libnspr4 libnss3 libpango1.0-0 librtmp0 libxss1 libxtst6 xdg-utils
 
 ## Chrome
 mkdir -p /usr/share/icons/hicolor

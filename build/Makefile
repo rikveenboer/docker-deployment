@@ -5,7 +5,7 @@ FILE = $(DIR)/Dockerfile
 FROM = ubuntu:trusty
 PORT = 8001
 MODE = minimal
-ARGS = --no-cache
+ARGS = --no-cache --rm=true
 
 include $(wildcard $(HOME)/build/make/*.mk)
 
@@ -36,7 +36,7 @@ build: prepare
 	$(call script,cleanup)
 	@echo 'CMD ["/opt/init"]' >> ${FILE}
 	@$(shell cd ${BASE} && python -m SimpleHTTPServer $(PORT) > /dev/null &)
-	@docker build -t $(NAME):$(VERSION) --rm=true $(ARGS) ${DIR}
+	@docker build -t $(NAME):$(VERSION) $(ARGS) ${DIR}
 	@kill -9 $(lsof -i tcp:8001 -t)
 
 prepare:

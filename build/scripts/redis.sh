@@ -4,7 +4,7 @@ source /build/config
 set -x
 
 ## Redis
-$minimal_apt_get_install redis-server
+apt_get_install_permanent redis-server
 
 export REDIS_CONFIG=/etc/redis/redis.conf
 export REDIS_LOG=/host/var/log/redis/redis.log

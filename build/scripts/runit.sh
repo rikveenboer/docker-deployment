@@ -4,4 +4,4 @@ source /build/config
 set -x
 
 ## Install runit
-$minimal_apt_get_install runit
+apt_get_install_permanent runit

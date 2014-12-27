@@ -4,7 +4,7 @@ source /build/config
 set -x
 
 ## Hamachi dependency
-$minimal_apt_get_install lsb-core net-tools socat strace
+apt_get_install_permanent lsb-core net-tools socat strace
 
 ## Hamachi
 cd /opt

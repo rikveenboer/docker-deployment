@@ -4,7 +4,7 @@ source /build/config
 set -x
 
 ## Install the SSH server
-$minimal_apt_get_install openssh-server
+apt_get_install_permanent openssh-server
 mkdir /var/run/sshd
 
 ## Install root key
@@ -19,7 +19,7 @@ ssh-keygen -t rsa -N "" -f id_rsa
 cat /opt/id_rsa.pub >> "$AUTHORIZED_KEYS"
 
 ## X11 forwarding
-$minimal_apt_get_install xauth
+apt_get_install_permanent xauth
 
 ## Setup environment
 sed -i "1iexport HOME=/root" /root/.profile

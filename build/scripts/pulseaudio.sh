@@ -4,7 +4,7 @@ source /build/config
 set -x
 
 ## Pulseaudio
-$minimal_apt_get_install pulseaudio
+apt_get_install_permanent pulseaudio
 
 ## Setup environment
 sed -i "1iexport PULSE_SERVER=host" /root/.profile

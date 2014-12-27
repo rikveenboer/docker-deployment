@@ -4,7 +4,7 @@ source /build/config
 set -x
 
 ## UPnP Proxy dependency
-$minimal_apt_get_install uuid-dev
+apt_get_install_permanent uuid-dev
 
 ## UPnP Proxy
 cd opt

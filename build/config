@@ -2,7 +2,6 @@ export LC_ALL=C
 export DEBIAN_FRONTEND=noninteractive
 
 apt_get_install='apt-get install -y --no-install-recommends'
-minimal_apt_get_install=$apt_get_install
 
 apt_get_install_permanent() {
     echo $@ >> /build/permanent
