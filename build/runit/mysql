@@ -13,6 +13,6 @@ if [[ -n "$MYSQL_SETUP" ]]; then
     until [[ -n $(netstat -an | grep 3306) ]]; do
         sleep 1
     done
-    mysqladmin -u root password kreeft
+    mysqladmin -u root password dummy
     fg
 fi

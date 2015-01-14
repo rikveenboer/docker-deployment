@@ -1,1 +1,1 @@
-make -f $DOCKER_HOME/images/$1/Makefile build
+make -f $DOCKER_HOME/images/$1.mk build

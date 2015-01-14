@@ -1,11 +1,11 @@
+RANDOM = $(shell bash -c 'echo $$RANDOM')
 HOME = $(DOCKER_HOME)
 BASE = $(HOME)/build
-DIR = $(HOME)/images/$(NAME)
-FILE = $(DIR)/Dockerfile
+FILE = $(BASE)/Dockerfile
 FROM = ubuntu:trusty
 PORT = 8001
 MODE = minimal
-ARGS = --no-cache --rm=true
+ARGS = --rm=true #--no-cache
 
 include $(wildcard $(HOME)/build/make/*.mk)
 
@@ -17,27 +17,35 @@ define execute
 	$(call download,-O -,$(1),| bash)
 endef
 
-define script
-	$(call execute,scripts/$(1).sh)
-endef
-
 define boot
 	$(call download,-O /opt/init.d/$(1)_$(2),boot/$(2).sh)
+	@echo 'RUN chmod +x /opt/init.d/$(1)_$(2)' >> ${FILE}
 endef
 
 define runit
 	@echo 'RUN mkdir -p /etc/service/$(1)' >> ${FILE}
 	$(call download,-O /etc/service/$(1)/run,runit/$(1))
+	@echo 'RUN chmod +x /etc/service/$(1)/run' >> ${FILE}
+endef
+
+define script
+	$(call execute,scripts/$(1).sh)
+endef
+
+define script_force 
+    $(call execute,scripts/$(1).sh?random=$(RANDOM))
 endef
 
 all: build bin service clean
 
 build: prepare
 	$(call script,cleanup)
+	@echo 'RUN chmod +x /opt/init.d/*' >> ${FILE}
 	@echo 'CMD ["/opt/init"]' >> ${FILE}
 	@$(shell cd ${BASE} && python -m SimpleHTTPServer $(PORT) > /dev/null &)
-	@docker build -t $(NAME):$(VERSION) $(ARGS) ${DIR}
-	@kill -9 $(lsof -i tcp:8001 -t)
+	@sleep 2
+	@docker build -t $(NAME):$(VERSION) $(ARGS) ${BASE}
+	@kill -9 $(lsof -i tcp:$(PORT) -t)
 
 prepare:
 	@echo FROM $(FROM) > ${FILE}
@@ -46,8 +54,9 @@ prepare:
 	@echo ENV HOST_ADDR $(HOST_ADDR) >> ${FILE}
 	@echo ENV HOST_PORT $(PORT) >> ${FILE}
 	@echo 'RUN apt-get install -y wget' >> ${FILE}
-	$(call download,-P /build,config,)
-	$(call download,-P /build,init)
+	$(call download,-P /build,config)
+	$(call download,-P /opt,init)
+	@echo 'RUN chmod +x /opt/init' >> ${FILE}
 	$(call script,prepare)
 
 service:

@@ -30,11 +30,15 @@ ln -sf /bin/true /sbin/initctl
 dpkg-divert --local --rename --add /usr/bin/ischroot
 ln -sf /bin/true /usr/bin/ischroot
 
+## Fix known issue with user accounts
+## https://github.com/docker/docker/issues/6345#issuecomment-49245365
+ln -sf /bin/true /usr/bin/chfn
+
 ## Install HTTPS support for APT
 apt_get_install_permanent apt-transport-https
 
 ## Upgrade all packages
-#apt-get dist-upgrade -y --no-install-recommends
+apt-get dist-upgrade -y --no-install-recommends
 
 ## Fix locale
 apt_get_install_permanent language-pack-en

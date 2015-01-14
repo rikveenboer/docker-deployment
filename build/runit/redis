@@ -1,5 +1,4 @@
 #!/bin/sh
-echo "$HOST_ADDR host" >> /tmp/hosts
 mkdir -p `dirname $REDIS_LOG` $REDIS_DATA
 sysctl vm.overcommit_memory=1
 /usr/bin/redis-server $REDIS_CONFIG

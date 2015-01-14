@@ -1,0 +1,7 @@
+#!/bin/bash
+mkdir -p `dirname $LIGHTTPD_LOG` $LIGHTTPD_DOMAINS
+chown www-data:www-data `dirname $LIGHTTPD_LOG`
+if [[ ! -e $LIGHTTPD_DOMAINS ]]; then
+    touch $LIGHTTPD_DOMAINS/empty.conf
+fi
+/usr/sbin/lighttpd -D -f $LIGHTTPD_CONFIG

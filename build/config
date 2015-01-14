@@ -12,3 +12,8 @@ apt_get_install_temporary() {
     echo $@ >> /build/temporary
 	$apt_get_install "$@"
 }
+
+export_env() {
+    export $1="$2"
+    echo -n $2 > /etc/container_environment/$1
+}
