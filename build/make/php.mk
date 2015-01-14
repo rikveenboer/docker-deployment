@@ -1,2 +1,2 @@
 php:
-	$(call script_force,$@)
+	$(call script,$@)

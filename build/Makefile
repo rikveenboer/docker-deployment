@@ -3,14 +3,15 @@ HOME = $(DOCKER_HOME)
 BASE = $(HOME)/build
 FILE = $(BASE)/Dockerfile
 FROM = ubuntu:trusty
-PORT = 8001
-MODE = minimal
-ARGS = --rm=true #--no-cache
-
+INTERFACE = eth0
+PORT = 8000
+MODE = normal
+ARGS = --rm=false# --no-cache
 include $(wildcard $(HOME)/build/make/*.mk)
 
 define download
-	@echo 'RUN wget -q $(1) $$HOST_ADDR:$$HOST_PORT/$(2) $(3)' >> ${FILE}
+	@$(eval MD5=$(shell md5sum build/$(2) | awk '{print $$1}'))
+	@echo 'RUN wget -q $(1) $$HOST_ADDR:$$HOST_PORT/$(2) $(3) # $(MD5)' >> ${FILE}
 endef
 
 define execute
@@ -32,25 +33,20 @@ define script
 	$(call execute,scripts/$(1).sh)
 endef
 
-define script_force 
-    $(call execute,scripts/$(1).sh?random=$(RANDOM))
-endef
-
 all: build bin service clean
 
-build: prepare
+build: prepare base
 	$(call script,cleanup)
 	@echo 'RUN chmod +x /opt/init.d/*' >> ${FILE}
 	@echo 'CMD ["/opt/init"]' >> ${FILE}
 	@$(shell cd ${BASE} && python -m SimpleHTTPServer $(PORT) > /dev/null &)
-	@sleep 2
 	@docker build -t $(NAME):$(VERSION) $(ARGS) ${BASE}
 	@kill -9 $(lsof -i tcp:$(PORT) -t)
 
 prepare:
 	@echo FROM $(FROM) > ${FILE}
 	@echo ENV MODE $(MODE) >> ${FILE}
-	@$(eval HOST_ADDR := $(shell ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{print $$1}'))
+	@$(eval HOST_ADDR := $(shell ifconfig $(INTERFACE) | grep 'inet addr:' | cut -d: -f2 | awk '{print $$1}'))
 	@echo ENV HOST_ADDR $(HOST_ADDR) >> ${FILE}
 	@echo ENV HOST_PORT $(PORT) >> ${FILE}
 	@echo 'RUN apt-get install -y wget' >> ${FILE}

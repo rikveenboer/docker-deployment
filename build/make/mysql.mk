@@ -1,3 +1,3 @@
 mysql:
-	$(call script_force,$@)
+	$(call script,$@)
 	$(call runit,$@)

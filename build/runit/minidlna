@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 if [ ! -f $MINIDLNA_CONFIG ]; then
     mkdir -p `dirname $$MINIDLNA_CONFIG`
     cp /opt/minidlna-$MINIDLNA_VERSION/minidlna.conf $MINIDLNA_CONFIG

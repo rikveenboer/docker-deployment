@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 if [ ! -f $UPNPPROXY_CONFIG ]; then
     mkdir -p `dirname $UPNPPROXY_CONFIG`
      cp /opt/upnpproxy/doc/upnpproxy.conf $UPNPPROXY_CONFIG

@@ -1,2 +1,3 @@
 #!/bin/sh
+set -e
 /usr/sbin/cron -f

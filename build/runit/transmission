@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+mkdir -p `dirname $TRANSMISSION_LOG`
+transmission-daemon -f -g $TRANSMISSION_CONFIG -e $TRANSMISSION_LOG --log-error

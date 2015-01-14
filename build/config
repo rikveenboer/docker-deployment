@@ -5,15 +5,27 @@ apt_get_install='apt-get install -y --no-install-recommends'
 
 apt_get_install_permanent() {
     echo $@ >> /build/permanent
-	$apt_get_install "$@"
+    $apt_get_install "$@"
 }
 
 apt_get_install_temporary() {
     echo $@ >> /build/temporary
-	$apt_get_install "$@"
+    $apt_get_install "$@"
+}
+
+apt_remove() {
+    apt-get -y --purge autoremove
 }
 
 export_env() {
     export $1="$2"
     echo -n $2 > /etc/container_environment/$1
+}
+
+import_env() {
+    export $1=`cat /etc/container_environment/$1`
+}
+
+add_host() {
+    echo "echo \"\$${1^^}_PORT_3306_TCP_ADDR $1\" >> /tmp/hosts" >> /opt/init.d/*_hosts
 }

@@ -3,15 +3,17 @@ set -e
 source /build/config
 set -x
 
+## Create directories
+mkdir /etc/container_environment
+mkdir /opt/init.d
+
 ## Temporarily disable dpkg fsync to make building faster.
 echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/02apt-speedup
 
 ## Prevent initramfs updates from trying to run grub and lilo.
 ## https://journal.paul.querna.org/articles/2013/10/15/docker-ubuntu-on-rackspace/
 ## http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=594189
-export INITRD=no
-mkdir -p /etc/container_environment
-echo -n no > /etc/container_environment/INITRD
+export_env INITRD no
 
 ## Enable Ubuntu Universe and Multiverse.
 sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
@@ -43,6 +45,3 @@ apt-get dist-upgrade -y --no-install-recommends
 ## Fix locale
 apt_get_install_permanent language-pack-en
 locale-gen en_US
-
-## Create directory for boot scripts
-mkdir /opt/init.d/

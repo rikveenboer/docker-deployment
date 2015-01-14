@@ -1,0 +1,3 @@
+#!/bin/bash
+set -e
+/opt/Sick-Beard/SickBeard.py --config=$SICKBEARD_CONFIG --datadir=$SICKBEARD_DATA

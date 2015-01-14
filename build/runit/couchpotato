@@ -1,0 +1,3 @@
+#!/bin/bash
+set -e
+/opt/CouchPotatoServer/CouchPotato.py --config_file $COUCHPOTATO_CONFIG --data_dir $COUCHPOTATO_DATA

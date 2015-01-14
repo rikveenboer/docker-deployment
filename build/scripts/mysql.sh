@@ -17,3 +17,9 @@ export_env MYSQL_DATA /host/var/lib/mysql
 sed -i "s,^\(log_error\s*=\s*\).*$,\1$MYSQL_LOG," $MYSQL_CONFIG
 sed -i "s,^\(datadir\s*=\s*\).*$,\1$MYSQL_DATA," $MYSQL_CONFIG
 sed -i "s,^\(bind-address\s*=\s*\).*$,\10.0.0.0," $MYSQL_CONFIG
+tee -a $MYSQL_CONFIG <<EOF
+
+[mysqld]
+skip-grant-tables
+EOF
+# mysql -u root -pdummy -e "GRANT ALL ON *.* to root@'%' IDENTIFIED BY 'dummy';"

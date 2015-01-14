@@ -1,0 +1,3 @@
+#!/bin/bash
+set -e
+python /opt/headphones/Headphones.py --config=$HEADPHONES_CONFIG --datadir=$HEADPHONES_DATA
