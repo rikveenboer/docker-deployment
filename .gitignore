@@ -1,8 +1,8 @@
-/fs/*/var/*
 /tmp.txt
+/todo.txt
 /test/
-/images/*/Dockerfile
 maestro.yaml
 setup
 README.md
 /build/Dockerfile
+/images/phpmyadmin/Dockerfile
