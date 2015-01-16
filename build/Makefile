@@ -10,7 +10,7 @@ ARGS = --rm=false# --no-cache
 include $(wildcard $(HOME)/build/make/*.mk)
 
 define download
-	@$(eval MD5=$(shell md5sum build/$(2) | awk '{print $$1}'))
+	@$(eval MD5=$(shell md5sum $(HOME)/build/$(2) | awk '{print $$1}'))
 	@echo 'RUN wget -q $(1) $$HOST_ADDR:$$HOST_PORT/$(2) $(3) # $(MD5)' >> ${FILE}
 endef
 
