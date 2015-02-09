@@ -1,0 +1,3 @@
+#!/bin/bash
+set -e
+mono /opt/NzbDrone/NzbDrone.exe --no-browser -data=$SONARR_DATA
