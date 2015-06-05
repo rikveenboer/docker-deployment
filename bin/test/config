@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+command_test() {
+	echo "$@"
+	echo "$1"
+}
+
+command_remove() {
+    cat bla | xargs echo
+}
+
+command_test bla
+command_test bla da ra

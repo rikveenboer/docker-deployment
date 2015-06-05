@@ -1,0 +1,7 @@
+docker run -t -i -n=false \
+  --lxc-conf="lxc.network.type = veth" \
+  --lxc-conf="lxc.network.flags = up" \
+  --lxc-conf="lxc.network.link = br0" \
+  --lxc-conf="lxc.network.ipv4 = 10.0.2.123" \
+  --lxc-conf="lxc.network.ipv4.gateway=10.0.2.15" \
+  hamachi /bin/bash
