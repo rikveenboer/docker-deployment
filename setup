@@ -49,3 +49,4 @@ if [ -z "$DOCKER_HOME" ]; then
 fi
 
 mkdir -p $DOCKER_HOME
+docker run --rm -v /usr/local/bin:/target jpetazzo/nsenter

@@ -36,25 +36,26 @@ And make sure to restart the docker daemon. This enables LXC related tricks such
 
 ### In $DOCKER_HOME/bin
 
-#### app
-#### attach
 #### build
+Run build target on makefile for specified image.
 #### clean
+Delete all stopped containers.
 #### killall
+Kill all running containers.
 #### make
+Run specified target on makefile for specified image.
 #### purge
-#### run
+Delete all untagged containers.
+#### run-bash
+Run a container and execute bash.
 #### ssh
+Open a ssh connection to the specified running container and executed a command.
 #### stopall
-
-### In $DOCKER_HOME/images/&lt;image&gt;/
-#### app
-
-#### run
-
-#### ssh
-
-
+Stop all running containers.
+### enter
+Use nsenter to execute a command in the specified running container (deprecated by docker-exec).
+### enter-bash
+Use nsenter to execute bash in the specified running container (deprecated by docker-exec).
 
 Images are build using Makefiles in order to provide reusable pieces of functionality.
 

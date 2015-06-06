@@ -1,0 +1,2 @@
+PID=`docker inspect -f "{{ .State.Pid }}" $1`
+nsenter --target $PID --mount --uts --ipc --net --pid -- $2 -l
