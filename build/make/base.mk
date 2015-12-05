@@ -1,4 +1,4 @@
-base: cron syslog sshd hosts
+base: syslog sshd hosts
 	$(call script,init)
 	$(call script,runit)
 	$(call script,logrotate)
