@@ -1,7 +1,6 @@
 RANDOM = $(shell bash -c 'echo $$RANDOM')
 HOME = $(DOCKER_HOME)
 BASE = $(HOME)/build
-FILE = $(BASE)/Dockerfile
 TMP = /build/tmp
 FROM = ubuntu:trusty
 INTERFACE = eth0
@@ -19,13 +18,13 @@ define execute
 endef
 
 define boot
-	@$(eval TARGET := '/opt/init.d/$(1)_$(2)')
+	@$(eval TARGET = '/opt/init.d/$(1)_$(2)')
 	$(call add,boot/$(2).sh,$(TARGET))
 	@echo 'RUN chmod +x $(TARGET)' >> ${FILE}
 endef
 
 define runit
-	@$(eval TARGET := '/etc/service/$(1)/run')
+	@$(eval TARGET = '/etc/service/$(1)/run')
 	$(call add,runit/$(1),$(TARGET))
 	@echo 'RUN mkdir -p /etc/service/$(1)' >> ${FILE}
 	@echo 'RUN chmod +x $(TARGET)' >> ${FILE}
@@ -41,9 +40,11 @@ build: prepare base
 	$(call script,cleanup)
 	@echo 'RUN chmod +x /opt/init.d/*' >> ${FILE}
 	@echo 'CMD ["/opt/init"]' >> ${FILE}
-	@docker build -t $(NAME):$(VERSION) $(ARGS) ${BASE}
+	@docker build -t $(NAME):$(VERSION) $(ARGS) -f $(FILE) $(BASE)
+	@rm ${FILE}
 
 prepare:
+	@$(eval FILE = $(shell mktemp -p $(BASE)))
 	@echo FROM $(FROM) > ${FILE}
 	@echo ENV MODE $(MODE) >> ${FILE}
 	$(call add,config,/build/config)
