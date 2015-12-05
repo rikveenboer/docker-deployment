@@ -1,6 +1,6 @@
 include $(DOCKER_HOME)/build/Makefile
 
-NAME = test
+NAME = testing
 VERSION = latest
 
-build: php test
+build: testing
