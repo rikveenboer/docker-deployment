@@ -38,17 +38,16 @@ endef
 all: build bin service clean
 
 build: prepare base
-	$(call script,cleanup)
 	@echo 'RUN chmod +x /opt/init.d/*' >> ${FILE}
 	@echo 'CMD ["/opt/init"]' >> ${FILE}
+	@echo ENV MODE $(MODE) >> ${FILE}
+	$(call script,cleanup)
 	@docker build -t $(NAME):$(VERSION) $(ARGS) ${BASE}
 
 prepare:
 	@echo FROM $(FROM) > ${FILE}
-	@echo ENV MODE $(MODE) >> ${FILE}
 	$(call add,config,/build/config)
 	$(call add,init,/opt/init)
-	@echo 'RUN chmod +x /opt/init' >> ${FILE}
 	$(call script,prepare)
 
 clean:
