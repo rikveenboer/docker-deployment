@@ -2,35 +2,38 @@ RANDOM = $(shell bash -c 'echo $$RANDOM')
 HOME = $(DOCKER_HOME)
 BASE = $(HOME)/build
 FILE = $(BASE)/Dockerfile
+TMP = /opt/tmp
 FROM = ubuntu:trusty
 INTERFACE = eth0
 PORT = 8000
 MODE = normal
-ARGS = --rm=false# --no-cache
+ARGS = --rm=false --no-cache=false
 include $(wildcard $(HOME)/build/make/*.mk)
 
-define download
-	@$(eval MD5=$(shell md5sum $(HOME)/build/$(2) | awk '{print $$1}'))
-	@echo 'RUN wget -q $(1) $$HOST_ADDR:$$HOST_PORT/$(2) $(3) # $(MD5)' >> ${FILE}
+define add
+	@echo 'ADD $(1) $(2)' >> ${FILE}
 endef
 
 define execute
-	$(call download,-O -,$(1),| bash)
+	$(call add,$(1),$(2))
+	@echo 'RUN $(2)' >> ${FILE}
 endef
 
 define boot
-	$(call download,-O /opt/init.d/$(1)_$(2),boot/$(2).sh)
-	@echo 'RUN chmod +x /opt/init.d/$(1)_$(2)' >> ${FILE}
+	@$(eval TARGET := '/opt/init.d/$(1)_$(2)')
+	$(call add,boot/$(2).sh,$(TARGET))
+	@echo 'RUN chmod +x $(TARGET)' >> ${FILE}
 endef
 
 define runit
+	@$(eval TARGET := '/etc/service/$(1)/run')
+	$(call add,runit/$(1),$(TARGET))
 	@echo 'RUN mkdir -p /etc/service/$(1)' >> ${FILE}
-	$(call download,-O /etc/service/$(1)/run,runit/$(1))
-	@echo 'RUN chmod +x /etc/service/$(1)/run' >> ${FILE}
+	@echo 'RUN chmod +x $(TARGET)' >> ${FILE}
 endef
 
 define script
-	$(call execute,scripts/$(1).sh)
+	$(call execute,scripts/$(1).sh,$(TMP)/$(1).sh)
 endef
 
 all: build bin service clean
@@ -50,8 +53,8 @@ prepare:
 	@echo ENV HOST_ADDR $(HOST_ADDR) >> ${FILE}
 	@echo ENV HOST_PORT $(PORT) >> ${FILE}
 	@echo 'RUN apt-get install -y wget' >> ${FILE}
-	$(call download,-P /build,config)
-	$(call download,-P /opt,init)
+	$(call add,config,/build/config)
+	$(call add,init,/opt/init)
 	@echo 'RUN chmod +x /opt/init' >> ${FILE}
 	$(call script,prepare)
 
