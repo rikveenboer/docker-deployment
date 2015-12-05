@@ -2,7 +2,7 @@ RANDOM = $(shell bash -c 'echo $$RANDOM')
 HOME = $(DOCKER_HOME)
 BASE = $(HOME)/build
 FILE = $(BASE)/Dockerfile
-TMP = /opt/tmp
+TMP = /build/tmp
 FROM = ubuntu:trusty
 INTERFACE = eth0
 MODE = normal
@@ -38,14 +38,14 @@ endef
 all: build bin service clean
 
 build: prepare base
+	$(call script,cleanup)
 	@echo 'RUN chmod +x /opt/init.d/*' >> ${FILE}
 	@echo 'CMD ["/opt/init"]' >> ${FILE}
-	@echo ENV MODE $(MODE) >> ${FILE}
-	$(call script,cleanup)
 	@docker build -t $(NAME):$(VERSION) $(ARGS) ${BASE}
 
 prepare:
 	@echo FROM $(FROM) > ${FILE}
+	@echo ENV MODE $(MODE) >> ${FILE}
 	$(call add,config,/build/config)
 	$(call add,init,/opt/init)
 	$(call script,prepare)
