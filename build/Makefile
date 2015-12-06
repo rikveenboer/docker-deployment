@@ -38,7 +38,7 @@ all: build bin service clean
 
 build: prepare base
 	$(call script,cleanup)
-	@echo 'RUN chmod +x /opt/init.d/*' >> ${FILE}
+	@echo 'RUN chmod +x /opt/init.d/* || :' >> ${FILE}
 	@echo 'CMD ["/opt/init"]' >> ${FILE}
 	@docker build -t $(NAME):$(VERSION) $(ARGS) -f $(FILE) $(BASE)
 	@rm ${FILE}

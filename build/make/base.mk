@@ -1,5 +1,4 @@
-base: cron syslog sshd
+base: cron sshd
 	$(call script,utilities)
 	$(call script,init)
 	$(call script,runit)
-	$(call script,logrotate)
