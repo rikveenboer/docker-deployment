@@ -1,12 +1,8 @@
-RANDOM = $(shell bash -c 'echo $$RANDOM')
-HOME = $(DOCKER_HOME)
-BASE = $(HOME)/build
 TMP = /build/tmp
 FROM = ubuntu:trusty
-INTERFACE = eth0
 MODE = normal
 ARGS = --rm=false --no-cache=false
-include $(wildcard $(HOME)/build/make/*.mk)
+include $(wildcard $(DOCKER_HOME)/build/make/*.mk)
 
 define add
 	@echo 'ADD $(1) $(2)' >> ${FILE}
@@ -40,11 +36,11 @@ build: prepare base
 	$(call script,cleanup)
 	@echo 'RUN chmod +x /opt/init.d/* || :' >> ${FILE}
 	@echo 'CMD ["/opt/init"]' >> ${FILE}
-	@docker build -t $(NAME):$(VERSION) $(ARGS) -f $(FILE) $(BASE)
+	@docker build -t $(NAME):$(VERSION) $(ARGS) -f $(FILE) $(DOCKER_HOME)/build
 	@rm ${FILE}
 
 prepare:
-	@$(eval FILE = $(shell mktemp -p $(BASE)))
+	@$(eval FILE = $(shell mktemp -p $(DOCKER_HOME)/build))
 	@echo FROM $(FROM) > ${FILE}
 	@echo ENV MODE $(MODE) >> ${FILE}
 	$(call add,config,/build/config)
