@@ -7,7 +7,7 @@ set -x
 
 
 ## BackInTime
-apt_get_install_permanent backintime-common python-dbus
+apt_install_permanent backintime-common python-dbus
 
 ## Configuration
 

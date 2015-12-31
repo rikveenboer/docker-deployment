@@ -4,7 +4,7 @@ source /build/config
 set -x
 
 ## Transmission
-apt_get_install_permanent transmission-daemon jq
+apt_install_permanent transmission-daemon jq
 
 ## Environment
 export_env TRANSMISSION_CONFIG /host/etc/transmission

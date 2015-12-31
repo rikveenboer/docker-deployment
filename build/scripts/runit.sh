@@ -4,4 +4,4 @@ source /build/config
 set -x
 
 ## Install runit
-apt_get_install_permanent runit
+apt_install_permanent runit

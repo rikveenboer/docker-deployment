@@ -4,7 +4,7 @@ source /build/config
 set -x
 
 # GMediaRender dependencies
-apt_get_install_permanent libupnp-dev libgstreamer0.10-dev \
+apt_install_permanent libupnp-dev libgstreamer0.10-dev \
             gstreamer0.10-plugins-base gstreamer0.10-plugins-good \
             gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly \
             gstreamer0.10-ffmpeg \
