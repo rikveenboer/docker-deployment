@@ -9,9 +9,9 @@ export_env PHP_CONFIG /usr/local/lib/php.ini
 export_env PHP_TIMEZONE Europe/Amsterdam
 
 ## PHP
-apt_get_install_temporary gcc make
+apt_install_temporary gcc make
 cd /opt
-apt_get_install_permanent libxml2-dev libcurl4-openssl-dev libbz2-dev libjpeg-dev libpng12-dev libmcrypt-dev
+apt_install_permanent libxml2-dev libcurl4-openssl-dev libbz2-dev libjpeg-dev libpng12-dev libmcrypt-dev
 wget http://uk1.php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror -O  php-$PHP_VERSION.tar.gz && \
 tar xzf php-$PHP_VERSION.tar.gz && \
 cd php-$PHP_VERSION

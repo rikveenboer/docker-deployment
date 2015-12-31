@@ -11,7 +11,7 @@ export_env AUTOMYSQLBACKUP_CONFIG /etc/automysqlbackup/automysqlbackup.conf
 export_env AUTOMYSQLBACKUP_DATA /host/var/backup/db
 
 ## AutoMySQLBackup
-apt_get_install_permanent mysql-client
+apt_install_permanent mysql-client
 cd /opt
 wget "http://downloads.sourceforge.net/project/automysqlbackup/AutoMySQLBackup/AutoMySQLBackup VER $AUTOMYSQLBACKUP_VERSION_MAJOR/automysqlbackup-$AUTOMYSQLBACKUP_VERSION.tar.gz"
 mkdir automysqlbackup

@@ -7,5 +7,5 @@ set -x
 export_env FTP_DATA /host/var/lib/ftp
 
 ## Pure-FTPd
-apt-get update
-apt_get_install_permanent pure-ftpd
+apt update
+apt_install_permanent pure-ftpd

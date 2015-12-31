@@ -11,9 +11,9 @@ export_env LIGHTTPD_CONFIG /etc/lighttpd/lighttpd.conf
 export_env LIGHTTPD_LOG /host/var/log/lighttpd/error.log
 
 ## Lighthttpd
-apt_get_install_permanent lighttpd
-apt-get build-dep -y lighttpd
-apt_get_install_temporary automake
+apt_install_permanent lighttpd
+apt build-dep -y lighttpd
+apt_install_temporary automake
 cd /opt
 wget http://download.lighttpd.net/lighttpd/releases-$LIGHTTPD_VERSION_MAJOR.x/lighttpd-$LIGHTTPD_VERSION.tar.gz
 tar xzf lighttpd-$LIGHTTPD_VERSION.tar.gz && \

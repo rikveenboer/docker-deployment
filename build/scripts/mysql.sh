@@ -6,7 +6,7 @@ set -x
 ## MySQL
 debconf-set-selections <<< 'mariadb-server mariadb-server/root_password password dummy'
 debconf-set-selections <<< 'mariadb-server mariadbql-server/root_password_again password dummy'
-apt_get_install_permanent mariadb-server 
+apt_install_permanent mariadb-server 
 
 ## Environment
 export_env MYSQL_CONFIG /etc/mysql/my.cnf

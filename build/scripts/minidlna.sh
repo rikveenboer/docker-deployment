@@ -4,7 +4,7 @@ source /build/config
 set -x
 
 # MiniDLNA dependencies
-apt_get_install_permanent gettext libavutil-dev libavcodec-dev libavformat-dev libjpeg-dev libsqlite3-dev libexif-dev libid3tag0-dev libogg-dev libvorbis-dev libFLAC-dev
+apt_install_permanent gettext libavutil-dev libavcodec-dev libavformat-dev libjpeg-dev libsqlite3-dev libexif-dev libid3tag0-dev libogg-dev libvorbis-dev libFLAC-dev
 
 export MINIDLNA_VERSION=1.1.1
 export MINIDLNA_CONFIG=/host/etc/minidlna.conf

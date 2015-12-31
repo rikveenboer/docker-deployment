@@ -18,7 +18,7 @@ export_env INITRD no
 ## Enable Ubuntu Universe and Multiverse.
 sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
 sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
-apt-get update
+apt update
 
 ## Fix some issues with APT packages
 ## See https://github.com/dotcloud/docker/issues/1024
@@ -37,11 +37,11 @@ ln -sf /bin/true /usr/bin/ischroot
 ln -sf /bin/true /usr/bin/chfn
 
 ## Install HTTPS support for APT
-apt_get_install_permanent apt-transport-https
+apt_install_permanent apt-transport-https
 
 ## Upgrade all packages
-apt-get dist-upgrade -y --no-install-recommends
+apt dist-upgrade -y --no-install-recommends
 
 ## Fix locale
-apt_get_install_permanent language-pack-en
+apt_install_permanent language-pack-en
 locale-gen en_US
