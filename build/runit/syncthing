@@ -1,0 +1,3 @@
+#!/bin/sh
+set -e
+/opt/syncthing/syncthing -home=$SYNCTHING_CONFIG
