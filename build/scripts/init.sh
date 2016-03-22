@@ -4,6 +4,7 @@ source /build/config
 set -x
 
 ## Install init process
+mkdir -p /opt/init.d
 mkdir -p /etc/container_environment
 touch /etc/container_environment.sh
 touch /etc/container_environment.json
