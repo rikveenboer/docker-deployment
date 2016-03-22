@@ -1,2 +1,2 @@
 compile:
-	ln -f $(BASE)/scripts/*_$@.sh build/scripts
+	$(call script,$@)
