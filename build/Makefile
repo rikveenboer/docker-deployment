@@ -1,5 +1,5 @@
 TMP = /build/tmp
-FROM = ubuntu:trusty
+FROM = debian:jessie
 MODE = normal
 ARGS = --rm=false --no-cache=false
 include $(wildcard $(DOCKER_HOME)/build/make/*.mk)
@@ -34,7 +34,7 @@ all: build bin service clean
 
 build: prepare base
 	$(call script,cleanup)
-	@echo 'RUN chmod +x /opt/init.d/* || :' >> ${FILE}
+	@echo 'RUN chmod +x -R /opt/init.d' >> ${FILE}
 	@echo 'CMD ["/opt/init"]' >> ${FILE}
 	@docker build -t $(NAME):$(VERSION) $(ARGS) -f $(FILE) $(DOCKER_HOME)/build
 	@rm ${FILE}
@@ -44,9 +44,9 @@ prepare:
 	@echo FROM $(FROM) > ${FILE}
 	@echo ENV MODE $(MODE) >> ${FILE}
 	$(call add,config,/build/config)
-	$(call add,init,/opt/init)
+	$(call add,init,/opt/init)    
+	@echo 'RUN chmod +x /opt/init' >> ${FILE}
 	$(call script,prepare)
-
 clean:
 	@rm -f ${FILE}
 	@rm -rf build

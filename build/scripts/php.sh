@@ -4,16 +4,17 @@ source /build/config
 set -x
 
 ## Environment
-export_env PHP_VERSION 5.6.4
+export_env PHP_VERSION 5.6.20
 export_env PHP_CONFIG /usr/local/lib/php.ini
-export_env PHP_TIMEZONE Europe/Amsterdam
+export_env PHP_TIMEZONE Europe/London
+
+## Dependencies
+apt_install_permanent libxml2-dev libcurl4-openssl-dev libbz2-dev libjpeg-dev libpng12-dev libmcrypt-dev libssl-dev pkg-config
 
 ## PHP
-apt_install_temporary gcc make
 cd /opt
-apt_install_permanent libxml2-dev libcurl4-openssl-dev libbz2-dev libjpeg-dev libpng12-dev libmcrypt-dev
-wget http://uk1.php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror -O  php-$PHP_VERSION.tar.gz && \
-tar xzf php-$PHP_VERSION.tar.gz && \
+wget http://uk1.php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror -O  php-$PHP_VERSION.tar.gz
+tar xzf php-$PHP_VERSION.tar.gz
 cd php-$PHP_VERSION
 ./configure --enable-calendar --enable-bcmath --with-bz2 --enable-ctype --without-gdbm --with-iconv --enable-exif --enable-ftp --with-gettext --enable-mbstring --enable-sockets --with-zlib --enable-soap --enable-zip --with-mhash --with-curl --with-gd --with-mysql --with-jpeg-dir --with-openssl --with-mysqli --with-mcrypt
 make

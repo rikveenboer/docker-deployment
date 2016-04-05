@@ -15,9 +15,8 @@ echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/02apt-speedup
 ## http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=594189
 export_env INITRD no
 
-## Enable Ubuntu Universe and Multiverse.
-sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
-sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
+## Enable sources in APT
+echo 'deb-src http://httpredir.debian.org/debian/ jessie main' >> /etc/apt/sources.list
 apt update
 
 ## Fix some issues with APT packages
@@ -41,7 +40,3 @@ apt_install_permanent apt-transport-https
 
 ## Upgrade all packages
 apt dist-upgrade -y --no-install-recommends
-
-## Fix locale
-apt_install_permanent language-pack-en
-locale-gen en_US
