@@ -1,2 +1,2 @@
-php:
+php: compile
 	$(call script,$@)
