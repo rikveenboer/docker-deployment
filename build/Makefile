@@ -1,7 +1,8 @@
 TMP = /build/tmp
 FROM = debian:jessie
-MODE = normal
+MODE = minimal
 ARGS = --rm=false --no-cache=false
+PROXY = $(shell ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
 include $(wildcard $(DOCKER_HOME)/build/make/*.mk)
 
 define add
@@ -36,6 +37,9 @@ build: prepare base
 	$(call script,cleanup)
 	@echo 'RUN chmod +x -R /opt/init.d' >> ${FILE}
 	@echo 'CMD ["/opt/init"]' >> ${FILE}
+ifneq ($(PROXY),)
+	@$(eval ARGS += --build-arg HTTP_PROXY=http://$(PROXY):3142)
+endif
 	@docker build -t $(NAME):$(VERSION) $(ARGS) -f $(FILE) $(DOCKER_HOME)/build
 	@rm ${FILE}
 
@@ -44,9 +48,10 @@ prepare:
 	@echo FROM $(FROM) > ${FILE}
 	@echo ENV MODE $(MODE) >> ${FILE}
 	$(call add,config,/build/config)
-	$(call add,init,/opt/init)    
+	$(call add,init,/opt/init)
 	@echo 'RUN chmod +x /opt/init' >> ${FILE}
 	$(call script,prepare)
+
 clean:
 	@rm -f ${FILE}
 	@rm -rf build
@@ -54,10 +59,10 @@ clean:
 
 ssh:
 	@ID=$$(docker ps | grep "$(NAME):$(VERSION)" | awk '{ print $$1 }') && \
-        if test "$$ID" = ""; then echo "Container is not running."; exit 1; fi && \
-        if ! test -s id_rsa; then \
-            docker cp $$ID:/opt/id_rsa . ;\
-        fi && \
-        IP=$$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $$ID) && \
-        echo "SSHing into $$IP" && \
-        ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i id_rsa root@$$IP ${CMD}
+		if test "$$ID" = ""; then echo "Container is not running."; exit 1; fi && \
+		if ! test -s id_rsa; then \
+			docker cp $$ID:/opt/id_rsa . ;\
+		fi && \
+		IP=$$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $$ID) && \
+		echo "SSHing into $$IP" && \
+		ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i id_rsa root@$$IP ${CMD}
