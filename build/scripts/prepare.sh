@@ -15,8 +15,10 @@ echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/02apt-speedup
 ## http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=594189
 export_env INITRD no
 
-## Enable sources in APT
+## Enable sources and backports in APT
 echo 'deb-src http://httpredir.debian.org/debian/ jessie main' >> /etc/apt/sources.list
+echo 'deb http://httpredir.debian.org/debian/ jessie-backports main contrib non-free' >> /etc/apt/sources.list
+echo 'deb-src http://httpredir.debian.org/debian/ jessie-backports main contrib non-free' >> /etc/apt/sources.list
 apt update
 
 ## Fix some issues with APT packages
