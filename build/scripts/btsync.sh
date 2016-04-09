@@ -4,7 +4,7 @@ source /build/config
 set -x
 
 ## Configuration
-export_env BTSYNC_CONFIG /host/etc/btsync.conf
+export_env BTSYNC_CONFIG /host/etc/btsync/btsync.conf
 export_env BTSYNC_DATA /host/var/btsync
 
 ## BTsync
