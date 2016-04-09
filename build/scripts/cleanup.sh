@@ -5,7 +5,8 @@ set -x
 
 ## Remove temporary packages for minimal builds
 if [ $MODE == "minimal" ]; then
-    apt_remove "$(cat /build/temporary)"
+cat /build/temporary
+    apt_remove $(cat /build/temporary)
 fi
 
 ## Clean apt files
