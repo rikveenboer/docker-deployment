@@ -4,4 +4,4 @@ source /build/config
 set -x
 
 ## Often used tools
-apt_install_temporary gcc make automake libtool
+apt_install_temporary build-essential yasm cmake automake autopoint autoconf pkg-config
