@@ -4,7 +4,7 @@ source /build/config
 set -x
 
 ## Remove temporary packages for minimal builds
-if [ $MODE == "minimal" ]; then
+if [ $MODE == "minimal" ] && [ -f /build/temporary ]; then
 cat /build/temporary
     apt_remove $(cat /build/temporary)
 fi
