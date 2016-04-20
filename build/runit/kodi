@@ -1,0 +1,3 @@
+#!/bin/sh
+set -e
+/opt/kodi-server/lib/kodi/kodi.bin --headless --no-test --nolirc -p
