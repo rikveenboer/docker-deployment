@@ -1,0 +1,2 @@
+encoders: compile
+	$(call script,$@)
