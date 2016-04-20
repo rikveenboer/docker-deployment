@@ -4,12 +4,12 @@ export DEBIAN_FRONTEND=noninteractive
 apt_install='apt-get install -y --no-install-recommends'
 
 apt_install_permanent() {
-    echo $@ >> /build/permanent
+    echo $@ | tr ' ' '\n' >> /build/permanent
     $apt_install "$@"
 }
 
 apt_install_temporary() {
-    echo $@ >> /build/temporary
+    echo $@ | tr ' ' '\n' >> /build/temporary
     $apt_install "$@"
 }
 
@@ -24,4 +24,10 @@ export_env() {
 
 import_env() {
     export $1=`cat /etc/container_environment/$1`
+}
+
+export_container_environment() {
+    for file in /etc/container_environment/*; do
+        export $(basename $file)="$(cat $file)";
+    done
 }
