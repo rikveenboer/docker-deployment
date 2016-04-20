@@ -14,11 +14,6 @@ mv phpMyAdmin-$PMA_VERSION-*/ phpMyAdmin-$PMA_VERSION/
 rm -r $PMA_ROOT/../*
 ln -s /opt/phpMyAdmin-$PMA_VERSION $PMA_ROOT
 
-## Remove installation files
-if [ $MODE == "minimal" ]; then
-    rm phpMyAdmin-$PMA_VERSION.tar.gz
-fi
-
 ## Configuration
 cat << EOF > $PMA_CONFIG
 <?php
@@ -30,3 +25,9 @@ cat << EOF > $PMA_CONFIG
 \$cfg['Servers'][1]['extension'] = 'mysqli';
 \$cfg['Servers'][1]['AllowNoPassword'] = true;
 EOF
+
+## Remove installation files
+if [ $MODE == "minimal" ]; then
+    cd /opt
+    rm phpMyAdmin-$PMA_VERSION-all-languages.tar.gz
+fi
