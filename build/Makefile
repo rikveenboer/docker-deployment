@@ -3,6 +3,7 @@ FROM = debian:jessie
 MODE = minimal
 ARGS = --rm=false --no-cache=false
 PROXY = $(shell ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
+JOBS = 2
 include $(wildcard $(DOCKER_HOME)/build/make/*.mk)
 
 define add
@@ -28,7 +29,7 @@ define runit
 endef
 
 define script
-	$(call execute,scripts/$(1).sh,$(TMP)/$(1).sh)
+	@python3 $(DOCKER_HOME)/build/parts.py $(1) $(FILE) $(TMP)
 endef
 
 all: build bin service clean
@@ -40,19 +41,26 @@ build: prepare base
 ifneq ($(PROXY),)
 	@$(eval ARGS += --build-arg HTTP_PROXY=http://$(PROXY):3142)
 endif
-	@docker build -t $(NAME):$(VERSION) $(ARGS) -f $(FILE) $(DOCKER_HOME)/build
+ifneq ($(JOBS),)
+	@$(eval ARGS += --build-arg JOBS="-j $(JOBS)")
+endif
+	docker build -t $(NAME):$(VERSION) $(ARGS) -f $(FILE) $(DOCKER_HOME)/build
 	@rm ${FILE}
 
 prepare:
 	@$(eval FILE = $(shell mktemp -p $(DOCKER_HOME)/build))
+	@rm $(DOCKER_HOME)/build/tmp.*
 	@echo FROM $(FROM) > ${FILE}
+	@echo 'ARG JOBS="-j $(JOBS)"' >> ${FILE}
 	@echo ENV MODE $(MODE) >> ${FILE}
 	$(call add,config,/build/config)
 	$(call add,init,/opt/init)
 	@echo 'RUN chmod +x /opt/init' >> ${FILE}
+	@mkdir -p $(DOCKER_HOME)/build/parts
 	$(call script,prepare)
 
 clean:
+	@rm -rf $(DOCKER_HOME)/build/parts
 	@rm -f ${FILE}
 	@rm -rf build
 	@rm -rf id_rsa
