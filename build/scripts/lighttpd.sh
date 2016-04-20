@@ -22,10 +22,17 @@ sed -i "s,\(pwd->pw_uid\s==\s\)0,\1-1," server.c
 sed -i "s,\(grp->gr_gid\s==\s\)0,\1-1," server.c
 cd ..
 ./configure --with-openssl
-make
+make $JOBS
 make install
 
 ## Configuration
 sed -i "s,^\(server.errorlog\s*=\s*\).*$,\1\"$LIGHTTPD_LOG\"," $LIGHTTPD_CONFIG
 sed -i "s,^\(server.username\s*=\s*\).*$,\1\"root\"," $LIGHTTPD_CONFIG
 sed -i "s,^\(server.groupname\s*=\s*\).*$,\1\"root\"," $LIGHTTPD_CONFIG
+
+## Remove installation files
+if [ $MODE == "minimal" ]; then
+    cd /opt
+    rm -r lighttpd-$LIGHTTPD_VERSION
+    rm lighttpd-$LIGHTTPD_VERSION.tar.gz
+fi
