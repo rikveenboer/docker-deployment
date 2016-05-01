@@ -1,0 +1,2 @@
+latex:
+	$(call script,$@)
