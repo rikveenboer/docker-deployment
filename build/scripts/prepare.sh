@@ -46,3 +46,7 @@ apt_install_permanent apt-transport-https
 
 ## Upgrade all packages
 apt dist-upgrade -y --no-install-recommends
+
+## Set timezone
+echo $TIMEZONE > /etc/timezone
+dpkg-reconfigure -f noninteractive tzdata
