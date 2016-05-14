@@ -7,7 +7,7 @@ if [ -n "$ID" ]; then
         docker cp $ID:/opt/id_rsa .
     fi
     chmod 0600 id_rsa
-    eval "$COMMAND \"$ARGS\""
+    eval "$COMMAND $ARGS"
 else
     echo "Container is not running."
 fi
