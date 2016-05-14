@@ -1,2 +1,0 @@
-ftp:
-	$(call script,$@)

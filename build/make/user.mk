@@ -1,2 +1,0 @@
-user:
-	$(call script,$@)
