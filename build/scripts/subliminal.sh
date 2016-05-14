@@ -1,9 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
-## Subliminal
 pip install git+git://github.com/Diaoul/subliminal.git
 cat << EOF > /opt/subliminal
 #!/bin/bash

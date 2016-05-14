@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
 ## Environment
 export_env SONARR_DATA /host/var/lib/sonarr
 

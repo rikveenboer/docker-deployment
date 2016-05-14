@@ -1,9 +1,4 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
-## Install the SSH server
+## Install OpenSSH
 apt_install_permanent openssh-server
 mkdir /var/run/sshd
 

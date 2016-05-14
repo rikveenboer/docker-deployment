@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
 ## Enable multimedia sources in APT
 echo 'deb http://www.deb-multimedia.org jessie main non-free' >> /etc/apt/sources.list
 echo 'deb-src http://www.deb-multimedia.org jessie main non-free' >> /etc/apt/sources.list

@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
 ## MySQL
 debconf-set-selections <<< 'mariadb-server mariadb-server/root_password password dummy'
 debconf-set-selections <<< 'mariadb-server mariadbql-server/root_password_again password dummy'
