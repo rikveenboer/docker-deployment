@@ -2,9 +2,14 @@ import sys
 import os
 import re
 
+# Arguments
 file = sys.argv[1]
 docker = open(sys.argv[2], 'a')
-tmp = sys.argv[3]
+
+# Parameters 
+tmp = '/build/tmp'
+config = '/build/config'
+shell = '/bin/bash'
 
 # Remove all normal comments
 path = '{}/build/scripts/{}.sh'.format(os.environ['DOCKER_HOME'], file)
@@ -16,23 +21,28 @@ for line in open(path):
 
 # Split on comments starting with ##
 parts = re.split('## .*', contents)
-first = parts.pop(0).strip()
+first = '''\
+#!{}
+set -ex
+source {}
+'''.format(shell, config)
 
 # Iterate over parts, except header
 i = 0
 for part in parts:
-    i += 1
+    if len(part) > 0:
+        i += 1
 
-    # Add reading environment variables
-    extra = '' if file == 'prepare' else 'export_container_environment\n'
+        # Add reading environment variables
+        extra = '' if file == 'prepare' else 'export_container_environment\n'
 
-    # Write parts file
-    contents = '{}\n{}{}'.format(first, extra, part)
-    partfile = '{}_{}.sh'.format(file, i)
-    path = '{}/build/parts/{}'.format(os.environ['DOCKER_HOME'], partfile)
-    open(path, 'w').write(contents)
-    os.chmod(path, 0o100)
+        # Write parts file
+        contents = '{}{}{}'.format(first, extra, part)
+        partfile = '{}_{}.sh'.format(file, i)
+        path = '{}/build/parts/{}'.format(os.environ['DOCKER_HOME'], partfile)
+        open(path, 'w').write(contents)
+        os.chmod(path, 0o100)
 
-    # Append to Dockerfile
-    docker.write('ADD parts/{} {}/{}\n'.format(partfile, tmp, partfile))
-    docker.write('RUN {}/{}\n'.format(tmp, partfile))
+        # Append to Dockerfile
+        docker.write('ADD parts/{} {}/{}\n'.format(partfile, tmp, partfile))
+        docker.write('RUN {}/{}\n'.format(tmp, partfile))
