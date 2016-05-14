@@ -1,10 +1,5 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
 ## Environment
-export_env PHP_VERSION 5.6.20
+export_env PHP_VERSION 5.6.21
 export_env PHP_CONFIG /usr/local/lib/php.ini
 export_env PHP_TIMEZONE Europe/London
 

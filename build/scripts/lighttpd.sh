@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
 ## Environment
 export_env LIGHTTPD_VERSION_MAJOR 1.4
 export_env LIGHTTPD_VERSION_MINOR 39

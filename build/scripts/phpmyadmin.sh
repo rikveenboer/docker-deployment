@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
 ## phpMyAdmin
 export_env PMA_VERSION 4.6.0
 export_env PMA_ROOT /var/www/html

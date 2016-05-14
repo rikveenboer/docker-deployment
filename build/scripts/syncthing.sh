@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
 ## Configuration
 export_env SYNCTHING_CONFIG /host/etc/syncthing
 export_env SYNCTHING_VERSION 0.12.20

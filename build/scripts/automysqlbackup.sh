@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
 ## Environment
 export_env AUTOMYSQLBACKUP_VERSION_MAJOR 3.0
 export_env AUTOMYSQLBACKUP_VERSION_MINOR rc6

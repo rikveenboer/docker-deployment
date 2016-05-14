@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
 ## Create directories and files
 mkdir /etc/container_environment
 mkdir /opt/init.d

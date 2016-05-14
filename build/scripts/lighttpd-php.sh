@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
 ## Environment
 export_env PHP_CONFIG /host/etc/php.ini
 export_env PHP_FCGI_CONFIG /etc/lighttpd/conf-enabled/15-fastcgi-php.conf

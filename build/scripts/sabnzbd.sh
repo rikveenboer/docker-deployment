@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
 ## Environment
 export_env RAR_VERSION 4.1.1
 export_env SABNZBD_CONFIG /host/etc/sabnzbd/sabnzbd.ini

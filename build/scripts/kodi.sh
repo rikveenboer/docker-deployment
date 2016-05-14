@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-    
 ## Configuration
 export_env KODI_ROOT /opt/kodi-server
 export_env KODI_VERSION 16.0

@@ -1,8 +1,3 @@
-#!/bin/bash
-set -e
-source /build/config
-set -x
-
 ## Environment
 export_env SICKBEARD_CONFIG /host/etc/sickbeard/config.ini    
 export_env SICKBEARD_DATA /host/var/lib/sickbeard 
