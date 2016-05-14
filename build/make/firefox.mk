@@ -1,2 +1,0 @@
-firefox: user
-	$(call script,$@)
