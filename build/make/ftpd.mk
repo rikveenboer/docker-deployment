@@ -1,0 +1,2 @@
+ftpd: base
+	$(call script,$@)

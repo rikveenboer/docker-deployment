@@ -1,4 +1,4 @@
-kodi: encoders
-	$(call add,aux/headless.patch,/headless.patch)
+kodi: base encoders
+	$(call file,headless.patch)
 	$(call script,$@)
 	$(call runit,$@)

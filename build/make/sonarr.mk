@@ -1,3 +1,3 @@
-sonarr:
+sonarr: base
 	$(call script,$@)
 	$(call runit,$@)

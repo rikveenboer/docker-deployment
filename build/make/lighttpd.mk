@@ -1,3 +1,3 @@
-lighttpd: compile
+lighttpd: base compile
 	$(call script,$@)
 	$(call runit,$@)
