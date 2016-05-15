@@ -1,13 +1,10 @@
 ## Configuration
 export_env SYNCTHING_CONFIG /host/etc/syncthing
-export_env SYNCTHING_VERSION 0.12.20
-
-## Dependencies
-apt_install_temporary curl ca-certificates
+export_env SYNCTHING_VERSION 0.12.23
 
 # Syncthing
 cd /opt
-curl -L -o syncthing.tar.gz https://github.com/syncthing/syncthing/releases/download/v$SYNCTHING_VERSION/syncthing-linux-amd64-v$SYNCTHING_VERSION.tar.gz
+curl -L -o syncthing.tar.gz http://archive.syncthing.net/v$SYNCTHING_VERSION/syncthing-linux-amd64-v$SYNCTHING_VERSION.tar.gz
 tar -xzvf syncthing.tar.gz
 rm -f syncthing.tar.gz
 mv syncthing-linux-amd64-v* syncthing

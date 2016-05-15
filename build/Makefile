@@ -10,7 +10,7 @@ define add
 	@echo 'ADD $(1) $(2)' >> ${FILE}
 endef
 
-define file
+define aux
     $(call add,files/$(1),/$(1))
 endef
 
