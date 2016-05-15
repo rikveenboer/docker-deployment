@@ -1,2 +1,2 @@
-backintime: base sshd cron
+backintime: base compile cron
 	$(call script,$@)
