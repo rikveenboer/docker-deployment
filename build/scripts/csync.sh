@@ -1,6 +1,10 @@
 ## Configuration
 export_env CSYNC_VERSION 2.0
 export_env CSYNC_CONFIG /host/etc/csync/csync2.cfg
+export_env LSYNC_CONFIG /host/etc/lsyncd.conf
+export_env LSYNC_LOG /host/var/log/lsyncd.log
+export_env LSYNC_STATUS /host/var/log/lsyncd_status.log
+export_env HOSTALIASES /host/etc/host.aliases
 
 ## Dependencies
 apt_install_permanent librsync-dev libsqlite3-dev libgnutls28-dev pkg-config
@@ -15,7 +19,7 @@ make
 make install
 make cert
 
-## xinetd
+## Xinetd
 apt_install_permanent xinetd
 
 ## Configuration
@@ -33,8 +37,25 @@ service csync2
 EOF
 echo "csync2 30865/tcp" >> /etc/services
 
+## Lsyncd dependencies
+apt_install_permanent lua5.2 liblua5.2-dev bash-completion
+ln -s /usr/share/bash-completion/completions/a2x /usr/bin/a2x
+chmod +x /usr/bin/a2x
+
+## Lsyncd
+cd /opt
+git clone https://github.com/axkibe/lsyncd.git
+cd lsyncd
+mkdir build
+cd build
+cmake ..
+sed -i 's,a2x,#,' CMakeFiles/manpage.dir/build.make
+make
+make install
+
 ## Remove installation files
 if [ $MODE == "minimal" ]; then
     cd /opt
     rm -rf csync2-$CSYNC_VERSION*
+    rm -r lsyncd
 fi

@@ -1,9 +1,11 @@
 #!/bin/bash
 set -e
-HOST_ETC_CSYNC=/host/etc/csync
-if [ ! -e $CSYNC_CONFIG ]; then
-    cp /usr/local/etc/csync2* $HOST_ETC_CSYNC/
-    csync2 -k $HOST_ETC_CSYNC/csync2.pem
+HOST_DIR=`dirname $CSYNC_CONFIG`
+CONTAINER_DIR=/usr/local/etc
+if [ ! -e $HOST_DIR/csync2.pem ]; then
+    csync2 -k $HOST_DIR/csync2.pem
+    cp -f $CONTAINER_DIR/csync2* $HOST_DIR/
 fi
-rm -r /usr/local/etc
-ln -sf $HOST_ETC_CSYNC/ /usr/local/etc
+rm -r $CONTAINER_DIR
+ln -sf $HOST_DIR/ $CONTAINER_DIR
+cp -f $HOST_DIR/csync2_$HOSTNAME.cfg $HOST_DIR/csync2.cfg
