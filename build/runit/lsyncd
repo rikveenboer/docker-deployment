@@ -1,0 +1,3 @@
+#!/bin/bash
+set -e
+/usr/local/bin/lsyncd -nodaemon $LSYNC_CONFIG
