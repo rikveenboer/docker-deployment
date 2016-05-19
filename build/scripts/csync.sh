@@ -19,6 +19,14 @@ make
 make install
 make cert
 
+## Address aliases
+cd /opt
+mv /addr_aliases.c .
+gcc -fPIC -shared -o addr_aliases.so addr_aliases.c
+mkdir -p /host/etc/
+touch /host/etc/addr_aliases
+echo /opt/addr_aliases.so >> /etc/ld.so.preload
+
 ## Xinetd
 apt_install_permanent xinetd
 
@@ -39,8 +47,6 @@ echo "csync2 30865/tcp" >> /etc/services
 
 ## Lsyncd dependencies
 apt_install_permanent lua5.2 liblua5.2-dev bash-completion
-ln -s /usr/share/bash-completion/completions/a2x /usr/bin/a2x
-chmod +x /usr/bin/a2x
 
 ## Lsyncd
 cd /opt
