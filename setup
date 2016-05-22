@@ -50,3 +50,5 @@ fi
 
 mkdir -p $DOCKER_HOME
 docker run --rm -v /usr/local/bin:/target jpetazzo/nsenter
+docker pull nate/dockviz
+pip install docker-squash

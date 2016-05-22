@@ -42,7 +42,9 @@ define arg
 endef
 
 build:
+ifneq ($(CLEANUP),)
 	$(call script,cleanup)
+endif	
 	@echo 'RUN chmod +x -R /opt/init.d' >> ${FILE}
 	docker build -t $(NAME):$(VERSION) $(ARGS) -f $(FILE) $(DOCKER_HOME)/build
 	@rm -f ${FILE}

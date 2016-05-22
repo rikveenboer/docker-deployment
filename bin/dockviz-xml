@@ -1,0 +1,2 @@
+DIR=`mkdir -t`
+cd $DIR

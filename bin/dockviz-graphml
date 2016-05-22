@@ -1,0 +1,10 @@
+DIR=`mktemp -d`
+cd $DIR
+wget -q https://bitbucket.org/dirkbaechle/dottoxml/raw/e285fccba8d51c6d814a83756935f3128972f0ea/src/X11Colors.py   
+wget -q https://bitbucket.org/dirkbaechle/dottoxml/raw/e285fccba8d51c6d814a83756935f3128972f0ea/src/dottoxml.py
+wget -q https://bitbucket.org/dirkbaechle/dottoxml/raw/e285fccba8d51c6d814a83756935f3128972f0ea/src/dot.py
+$DOCKER_HOME/bin/dockviz images -d > dockviz.dot
+python dottoxml.py dockviz.dot dockviz.graphml 
+cat dockviz.graphml
+cd - > /dev/null
+rm -rf $DIR
