@@ -9,7 +9,6 @@ wget https://files.phpmyadmin.net/phpMyAdmin/$PMA_VERSION/phpMyAdmin-$PMA_VERSIO
 tar xzf phpMyAdmin-$PMA_VERSION-all-languages.tar.gz phpMyAdmin-$PMA_VERSION-all-languages
 mv phpMyAdmin-$PMA_VERSION-*/ phpMyAdmin-$PMA_VERSION/
 rm -rf $PMA_ROOT
-mkdir -p $PMA_ROOT
 ln -sf /opt/phpMyAdmin-$PMA_VERSION $PMA_ROOT
 
 ## Configuration
