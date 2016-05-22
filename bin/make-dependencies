@@ -3,12 +3,13 @@ if [ ! -e $FILE ]; then
     FILE="$(mktemp)"
     cat <<- EOF > $FILE
         include \$(DOCKER_HOME)/build/Makefile
+        FROM = base:squash
         NAME = $1
         VERSION = latest
         build: prepare $1
 EOF
 fi
-make -f $FILE build
-CODE=$?
+make -Bnd -f $FILE build > $1.mk
+cat $1.mk | make2graph | dot -Tpng -o $1.mk.png
+cat $1.mk | make2graph -f x > $1.mk.xml
 rm $FILE
-exit $CODE
