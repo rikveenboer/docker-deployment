@@ -4,6 +4,5 @@ mkdir -p `dirname $MYSQL_LOG`
 if [ ! -d $MYSQL_DATA ]; then
     mkdir `dirname $MYSQL_DATA`
     cp /var/lib/mysql/ $MYSQL_DATA -R
-    chown mysql:mysql $MYSQL_DATA -R
 fi
-/usr/bin/mysqld_safe --skip-syslog > /host/var/log/mysql/daemon.log
+/usr/bin/mysqld_safe --skip-syslog
