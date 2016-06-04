@@ -1,4 +1,3 @@
 #!/bin/bash
 set -e
-ADDR=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{print $1}'`
-sabnzbdplus -f $SABNZBD_CONFIG -s $ADDR
+sabnzbdplus -f $SABNZBD_CONFIG
