@@ -5,4 +5,4 @@ apt update
 apt_install_permanent --force-yes deb-multimedia-keyring
 
 ## Encoders
-apt_install_permanent --force-yes libmp3lame0 libavcodec-extra* libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libopenjpeg-dev libx264-dev libfaac-dev
+apt_install_permanent --force-yes libmp3lame0 libavcodec-extra* libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libopenjpeg-dev libx264-* libfaac-dev 
