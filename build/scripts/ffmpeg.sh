@@ -12,3 +12,7 @@ cd ffmpeg-$FFMPEG_VERSION
 ./configure --enable-gpl --enable-postproc --enable-swscale --enable-avfilter --enable-libmp3lame --enable-libvorbis --enable-libtheora --enable-libx264 --enable-libspeex --enable-shared --enable-pthreads --enable-libopenjpeg --enable-libfaac --enable-nonfree
 make $JOBS
 make install
+
+## Enable libraries
+echo "/usr/local/lib" >> /etc/ld.so.conf
+ldconfig
