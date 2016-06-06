@@ -3,6 +3,7 @@ MODE = minimal
 PROXY = $(shell ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
 TIMEZONE = Europe/London
 JOBS = 2
+CLEANUP = true
 ARGS = --rm=false --no-cache=false
 include $(wildcard $(DOCKER_HOME)/build/make/*.mk)
 

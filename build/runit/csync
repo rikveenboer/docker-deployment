@@ -1,0 +1,3 @@
+#!/bin/bash
+set -e
+/usr/local/sbin/csync2 -iiv > $CSYNC_LOG

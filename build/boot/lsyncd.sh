@@ -70,7 +70,7 @@ initSync = {
                         error("Missing 'syncid' parameter.", 4)
                 end
                 local c = "csync2_" .. config.syncid .. ".cfg"
-                local f, err = io.open("$CSYNC_CONFIG_DIR" .. c, "r")
+                local f, err = io.open("$CSYNC_CONFIG_DIR/" .. c, "r")
                 if not f then
                         error("Invalid 'syncid' parameter: " .. err, 4)
                 end
@@ -78,11 +78,13 @@ initSync = {
         end
 }
 local sources = {
-        -- change the node1 value with respective host
-        -- ["/home/website/public_html"] = "node1"
+        -- ["/host/srv/data"] = "default"
 }
 for key, value in pairs(sources) do
         sync {initSync, source=key, syncid=value}
 end
 EOF
+fi
+if [ ! -e $LSYNC_LOG ]; then
+    mkdir -p `dirname $LSYNC_LOG`
 fi
