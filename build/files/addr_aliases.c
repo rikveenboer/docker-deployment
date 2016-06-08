@@ -57,7 +57,7 @@ int getaddrinfo(const char *node, const char *service, const struct addrinfo *hi
 	if (res_init() < 0) {
 		return EAI_SYSTEM;
     } else {
-        int (*f)() = dlsym (RTLD_NEXT, "getaddrinfo");
+        int (*f)() = dlsym(RTLD_NEXT, "getaddrinfo");
         return f(node, service, hints, res);
     }
 }

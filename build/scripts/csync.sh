@@ -25,7 +25,7 @@ make cert
 ## Address aliases
 cd /opt
 mv /addr_aliases.c .
-gcc -fPIC -shared -o addr_aliases.so addr_aliases.c  -ldl
+gcc -fPIC -shared -o addr_aliases.so addr_aliases.c -ldl
 mkdir -p /host/etc/
 touch /host/etc/addr_aliases
 echo /opt/addr_aliases.so >> /etc/ld.so.preload
