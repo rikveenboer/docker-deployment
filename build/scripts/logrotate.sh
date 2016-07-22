@@ -1,0 +1,1 @@
+apt_install_permanent logrotate
