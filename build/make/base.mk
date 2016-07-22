@@ -4,3 +4,4 @@ base:
 	@echo 'CMD ["/opt/init"]' >> ${FILE}
 	$(call script,utilities)
 	$(call script,runit)
+	$(call script,logrotate)

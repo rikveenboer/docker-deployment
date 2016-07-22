@@ -1,7 +1,7 @@
 FROM = debian:jessie
 MODE = minimal
 PROXY = $(shell ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
-TIMEZONE = Europe/London
+TIMEZONE = Europe/Amsterdam
 JOBS = 2
 CLEANUP = true
 ARGS = --rm=false --no-cache=false
