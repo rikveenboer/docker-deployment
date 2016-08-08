@@ -1,1 +1,1 @@
-apt_install_permanent texlive-full python-pygments gnuplot
+apt_install_permanent texlive-full biber python-pygments gnuplot
