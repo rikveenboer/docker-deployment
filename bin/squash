@@ -1,5 +1,5 @@
 TREEFILE="$(mktemp)"
 COMMANDFILE="$(mktemp)"
-$DOCKER_HOME/bin/make/dockviz images -t --no-trunc > $TREEFILE
+$DOCKER_HOME/bin/dockviz images -t --no-trunc > $TREEFILE
 python3 $DOCKER_HOME/squash.py $TREEFILE $COMMANDFILE
 . $COMMANDFILE
