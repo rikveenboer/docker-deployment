@@ -1,0 +1,2 @@
+handbrake: multimedia
+	$(call script,$@)

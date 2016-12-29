@@ -1,2 +1,2 @@
-ffmpeg:
+ffmpeg: compile
 	$(call script,ffmpeg)

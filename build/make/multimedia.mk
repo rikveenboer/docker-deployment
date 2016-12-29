@@ -1,0 +1,2 @@
+multimedia:
+	$(call script,$@)
