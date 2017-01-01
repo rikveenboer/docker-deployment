@@ -4,7 +4,7 @@ PROXY = $(shell ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
 TIMEZONE = Europe/Amsterdam
 JOBS = 2
 CLEANUP = true
-ARGS = --rm=false --no-cache=true
+ARGS = --rm=false --no-cache=false
 include $(wildcard $(DOCKER_HOME)/build/make/*.mk)
 
 define add

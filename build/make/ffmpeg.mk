@@ -1,2 +1,3 @@
-ffmpeg: compile
-	$(call script,ffmpeg)
+ffmpeg:
+	$(call script,utilities)
+	$(call script,$@)
