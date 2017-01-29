@@ -5,3 +5,4 @@ base:
 	$(call script,utilities)
 	$(call script,runit)
 	$(call script,logrotate)
+	$(call runit,logrotate)
