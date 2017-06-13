@@ -5,6 +5,9 @@ export_env AUTOMYSQLBACKUP_VERSION v${AUTOMYSQLBACKUP_VERSION_MAJOR}_${AUTOMYSQL
 export_env AUTOMYSQLBACKUP_CONFIG /etc/automysqlbackup/automysqlbackup.conf
 export_env AUTOMYSQLBACKUP_DATA /host/var/backup/db
 
+## Dependency
+apt_install_permanent pigz
+
 ## AutoMySQLBackup
 apt_install_permanent mysql-client
 cd /opt

@@ -1,5 +1,5 @@
 ## Configuration
-export_env PMA_VERSION 4.6.0
+export_env PMA_VERSION 4.7.1
 export_env PMA_ROOT /var/www/html
 export_env PMA_CONFIG $PMA_ROOT/config.inc.php
 

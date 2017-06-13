@@ -10,7 +10,7 @@ dpkg -i libdvdcss2_$LIBDVDCSS_VERSION-0_amd64.deb
 apt_install_permanent vobcopy
 
 ## Audio
-apt_install_permanent --force-yes libmp3lame0 libavcodec-extra* libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libopenjpeg-dev libx264-* libfaac-dev 
+apt_install_permanent libmp3lame0 libavcodec-extra* libmp3lame-dev libvorbis-dev libtheora-dev libspeex-dev libopenjpeg-dev libx264-* libfaac-dev
 
 ## Remove installation files
 if [ $MODE == "minimal" ]; then

@@ -1,12 +1,12 @@
 ## Environment
 export_env SONARR_DATA /host/var/lib/sonarr
 
-## Dependency
-apt_install_permanent libmono-cil-dev
+## Dependencies
+apt_install_permanent libmono-cil-dev sqlite3 mediainfo
 
 ## Sonarr
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC
 echo "deb http://apt.sonarr.tv/ develop main" | tee -a /etc/apt/sources.list
 apt update
-apt_install_permanent nzbdrone mediainfo
+apt_install_permanent nzbdrone
 chmod +x /opt/NzbDrone/NzbDrone.exe

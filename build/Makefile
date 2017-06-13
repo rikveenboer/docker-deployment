@@ -1,7 +1,7 @@
 FROM = debian:jessie
 MODE = minimal
 PROXY = $(shell ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
-TIMEZONE = Europe/Amsterdam
+TIMEZONE = Europe/London
 JOBS = 2
 CLEANUP = true
 ARGS = --rm=false --no-cache=false
@@ -45,7 +45,7 @@ endef
 build:
 ifneq ($(CLEANUP),)
 	$(call script,cleanup)
-endif	
+endif
 	@echo 'RUN chmod +x -R /opt/init.d' >> ${FILE}
 	docker build -t $(NAME):$(VERSION) $(ARGS) -f $(FILE) $(DOCKER_HOME)/build
 	@rm -f ${FILE}
@@ -55,7 +55,7 @@ prepare:
 	@rm -f $(DOCKER_HOME)/build/tmp.*
 	@echo FROM $(FROM) > ${FILE}
 ifneq ($(PROXY),)
-	$(call arg,PROXY,http://$(PROXY):3142)
+	$(call arg,HTTP_PROXY,http://$(PROXY):3142)
 endif
 ifneq ($(TIMEZONE),)
 	$(call arg,TIMEZONE,$(TIMEZONE))

@@ -1,8 +1,8 @@
 ## Environment
-export_env REDIS_CONFIG=/etc/redis/redis.conf
-export_env REDIS_LOG=/host/var/log/redis/redis.log
-export_env REDIS_DATA=/host/var/lib/redis
-export_env REDIS_VERSION=stable
+export_env REDIS_CONFIG /etc/redis/redis.conf
+export_env REDIS_LOG /host/var/log/redis/redis.log
+export_env REDIS_DATA /host/var/lib/redis
+export_env REDIS_VERSION stable
 
 ## Redis (repository)
 apt_install_permanent redis-server

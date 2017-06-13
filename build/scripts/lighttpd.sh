@@ -1,6 +1,6 @@
 ## Environment
 export_env LIGHTTPD_VERSION_MAJOR 1.4
-export_env LIGHTTPD_VERSION_MINOR 39
+export_env LIGHTTPD_VERSION_MINOR 45
 export_env LIGHTTPD_VERSION $LIGHTTPD_VERSION_MAJOR.$LIGHTTPD_VERSION_MINOR
 export_env LIGHTTPD_CONFIG /etc/lighttpd/lighttpd.conf
 export_env LIGHTTPD_LOG /host/var/log/lighttpd/error.log

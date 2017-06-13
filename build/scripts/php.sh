@@ -1,7 +1,7 @@
 ## Environment
-export_env PHP_VERSION 5.6.23
+export_env PHP_VERSION 7.1.6
 export_env PHP_CONFIG /usr/local/lib/php.ini
-export_env PHP_TIMEZONE $TIMEZONE 
+export_env PHP_TIMEZONE $TIMEZONE
 
 ## Dependencies
 apt_install_permanent libxml2-dev libcurl4-openssl-dev libbz2-dev libjpeg-dev libpng12-dev libmcrypt-dev libssl-dev pkg-config
