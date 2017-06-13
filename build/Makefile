@@ -1,6 +1,6 @@
 FROM = debian:jessie
 MODE = minimal
-PROXY = $(shell ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
+PROXY = $(shell ifconfig eth0 | grep 'inet' | cut -d: -f2 | awk '{ print $2}')
 TIMEZONE = Europe/London
 JOBS = 2
 CLEANUP = true
