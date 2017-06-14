@@ -57,7 +57,7 @@ prepare:
 	@rm -f $(DOCKER_HOME)/build/tmp.*
 	@echo FROM $(FROM) > ${FILE}
 ifneq ($(PROXY),)
-	$(call arg,HTTP_PROXY,http://$(PROXY):3142)
+	$(call arg,http_proxy,http://$(PROXY):3142)
 endif
 ifneq ($(TIMEZONE),)
 	$(call arg,TIMEZONE,$(TIMEZONE))
