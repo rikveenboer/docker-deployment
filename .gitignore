@@ -1,3 +1,4 @@
+/config.mk
 /*.sh
 /build/tmp.*
 /build/parts/*

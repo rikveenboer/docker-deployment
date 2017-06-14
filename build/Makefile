@@ -1,10 +1,12 @@
 FROM = debian:jessie
 MODE = minimal
-PROXY = $(shell ifconfig eth0 | grep 'inet' | cut -d: -f2 | awk '{ print $2}')
+PROXY = $(shell hostname -i)
 TIMEZONE = Europe/London
 JOBS = 2
 CLEANUP = true
 ARGS = --rm=false --no-cache=false
+
+include $(wildcard $(DOCKER_HOME)/config.mk)
 include $(wildcard $(DOCKER_HOME)/build/make/*.mk)
 
 define add
@@ -69,7 +71,7 @@ endif
 	$(call script,prepare)
 
 clean:
-	# @rm -rf $(DOCKER_HOME)/build/parts
+	@rm -rf $(DOCKER_HOME)/build/parts
 	@rm -f ${FILE}
 	@rm -rf build
 	@rm -rf id_rsa
