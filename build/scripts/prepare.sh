@@ -37,9 +37,11 @@ ln -sf /bin/true /usr/bin/ischroot
 ln -sf /bin/true /usr/bin/chfn
 
 ## Install HTTPS support for APT
+apt update
 apt_install_permanent apt-transport-https
 
 ## Upgrade all packages
+apt update
 apt dist-upgrade -y --no-install-recommends
 
 ## Set timezone
