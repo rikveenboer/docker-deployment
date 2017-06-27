@@ -1,7 +1,7 @@
 export LC_ALL=C
 export DEBIAN_FRONTEND=noninteractive
 
-apt_install='apt-get install -y --no-install-recommends --force-yes'
+apt_install='apt-get install -y --no-install-recommends'
 
 apt_install_permanent() {
     echo $@ | tr ' ' '\n' >> /build/permanent

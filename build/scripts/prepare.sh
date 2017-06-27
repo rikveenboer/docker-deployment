@@ -15,9 +15,9 @@ echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/02apt-speedup
 export_env INITRD no
 
 # Enable sources and backports in APT
-echo 'deb-src http://httpredir.debian.org/debian/ jessie main' >> /etc/apt/sources.list
-echo 'deb http://httpredir.debian.org/debian/ jessie-backports main contrib non-free' >> /etc/apt/sources.list
-echo 'deb-src http://httpredir.debian.org/debian/ jessie-backports main contrib non-free' >> /etc/apt/sources.list
+echo 'deb-src http://httpredir.debian.org/debian/ stretch main' >> /etc/apt/sources.list
+echo 'deb http://httpredir.debian.org/debian/ stretch-backports main contrib non-free' >> /etc/apt/sources.list
+echo 'deb-src http://httpredir.debian.org/debian/ stretch-backports main contrib non-free' >> /etc/apt/sources.list
 apt update
 
 ## Fix some issues with APT packages
@@ -36,12 +36,10 @@ ln -sf /bin/true /usr/bin/ischroot
 # https://github.com/docker/docker/issues/6345#issuecomment-49245365
 ln -sf /bin/true /usr/bin/chfn
 
-## Install HTTPS support for APT
-apt update
-apt_install_permanent apt-transport-https
+## Package management
+apt_install_permanent apt-transport-https apt-utils
 
 ## Upgrade all packages
-apt update
 apt dist-upgrade -y --no-install-recommends
 
 ## Set timezone
