@@ -4,7 +4,7 @@ export_env KODI_VERSION 16.0
 export_env KODI_BRANCH Jarvis
 
 ## Build dependencies
-apt_install_permanent --force-yes uuid-dev swig openjdk-7-jre-headless libboost-dev python-dev libglew-dev libmysqlclient-dev libass-dev libmpeg2-4-dev libjpeg-dev libvorbis-dev libcurl4-gnutls-dev libbz2-dev libtiff-dev liblzo2-dev libssl-dev libtinyxml-dev libyajl-dev libxml2-dev libxslt1-dev libsqlite3-dev libpcre3-dev libtag1-dev libjasper-dev libmicrohttpd-dev libxrandr-dev libssh-dev libsmbclient-dev libnfs-dev libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev libpostproc-dev libswscale-dev libiso9660-dev libasound2-dev
+apt_install_permanent uuid-dev swig openjdk-7-jre-headless libboost-dev python-dev libglew-dev libmysqlclient-dev libass-dev libmpeg2-4-dev libjpeg-dev libvorbis-dev libcurl4-gnutls-dev libbz2-dev libtiff-dev liblzo2-dev libssl-dev libtinyxml-dev libyajl-dev libxml2-dev libxslt1-dev libsqlite3-dev libpcre3-dev libtag1-dev libjasper-dev libmicrohttpd-dev libxrandr-dev libssh-dev libsmbclient-dev libnfs-dev libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev libpostproc-dev libswscale-dev libiso9660-dev libasound2-dev
 
 ## Clone Kodi source
 cd /opt
@@ -26,7 +26,7 @@ make install
 mkdir -p $KODI_ROOT/share/kodi/portable_data/
 
 ## Runtime dependencies
-apt_install_permanent --force-yes libssh-4 libmicrohttpd10 libjasper1 libmysqlclient18 liblzo2-2 libtiff5 libglu1-mesa libglew1.10 libpython2.7 libtinyxml2.6.2 libyajl2 libxml2 libxslt1.1 libfribidi0 libpcrecpp0 libfreetype6 libtag1c2a libXrandr2 libsmbclient libx264-146 libvorbisenc2 libtheora0
+apt_install_permanent libssh-4 libmicrohttpd10 libjasper1 libmysqlclient18 liblzo2-2 libtiff5 libglu1-mesa libglew1.10 libpython2.7 libtinyxml2.6.2 libyajl2 libxml2 libxslt1.1 libfribidi0 libpcrecpp0 libfreetype6 libtag1c2a libXrandr2 libsmbclient libx264-146 libvorbisenc2 libtheora0
 
 ## Remove unnecessary files
 if [ $MODE == "minimal" ]; then
