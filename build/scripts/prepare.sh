@@ -18,7 +18,6 @@ export_env INITRD no
 echo 'deb-src http://httpredir.debian.org/debian/ stretch main' >> /etc/apt/sources.list
 echo 'deb http://httpredir.debian.org/debian/ stretch-backports main contrib non-free' >> /etc/apt/sources.list
 echo 'deb-src http://httpredir.debian.org/debian/ stretch-backports main contrib non-free' >> /etc/apt/sources.list
-apt update
 
 ## Fix some issues with APT packages
 # See https://github.com/dotcloud/docker/issues/1024
