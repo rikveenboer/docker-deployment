@@ -9,7 +9,7 @@ wget -O ffmpeg-$FFMPEG_VERSION.tar.gz https://github.com/xbmc/FFmpeg/archive/$FF
 tar xvzf ffmpeg-$FFMPEG_VERSION.tar.gz
 mv FFmpeg-$FFMPEG_VERSION-$KODI_BRANCH-$KODI_VERSION ffmpeg-$FFMPEG_VERSION
 cd ffmpeg-$FFMPEG_VERSION
-./configure --enable-gpl --enable-postproc --enable-swscale --enable-avfilter --enable-libmp3lame --enable-libvorbis --enable-libtheora --enable-libx264 --enable-libspeex --enable-shared --enable-pthreads --enable-libopenjpeg --enable-libfaac --enable-nonfree
+./configure --enable-gpl --enable-postproc --enable-swscale --enable-avfilter --enable-libmp3lame --enable-libvorbis --enable-libtheora --enable-libx264 --enable-libspeex --enable-shared --enable-pthreads --enable-libfaac --enable-nonfree
 make $JOBS
 make install
 
