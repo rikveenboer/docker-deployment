@@ -8,10 +8,13 @@ apt_install_permanent uuid-dev swig default-jre-headless libboost-dev python-dev
 
 ## JasPer
 cd /opt
-export_env JASPER_RELEASE 1.900.1-13+deb7u6_amd64
-wget http://security.debian.org/debian-security/pool/updates/main/j/jasper/libjasper1_$JASPER_RELEASE.deb
-wget http://security.debian.org/debian-security/pool/updates/main/j/jasper/libjasper-dev_$JASPER_RELEASE.deb
-dpkg -i --force-depends libjasper*.deb
+export_env JASPER_VERSION 2.0.12
+wget http://www.ece.uvic.ca/~frodo/jasper/software/jasper-$JASPER_VERSION.tar.gz
+tar xzf jasper-$JASPER_VERSION.tar.gz
+cd    jasper-$JASPER_VERSION/build
+cmake ..
+make
+make install
 
 ## Clone Kodi source
 cd /opt
@@ -19,6 +22,8 @@ git clone https://github.com/xbmc/xbmc.git -b $KODI_VERSION-$KODI_BRANCH --depth
 
 ## Patch Kodi source
 cd /opt/xbmc
+git fetch origin pull/9703/head:9703 --depth=1
+git checkout 9703
 mv /headless.patch .
 git apply --reject --whitespace=fix headless.patch
 
@@ -32,12 +37,12 @@ make $JOBS
 make install
 mkdir -p $KODI_ROOT/share/kodi/portable_data/
 
-## Runtime dependencies
-apt_install_permanent libssh-4 libmicrohttpd10 libjasper1 libmysqlclient18 liblzo2-2 libtiff5 libglu1-mesa libglew1.10 libpython2.7 libtinyxml2.6.2 libyajl2 libxml2 libxslt1.1 libfribidi0 libpcrecpp0 libfreetype6 libtag1c2a libXrandr2 libsmbclient libx264-146 libvorbisenc2 libtheora0
-
 ## Remove unnecessary files
 if [ $MODE == "minimal" ]; then
     cd /opt
     rm -r xbmc
-    apt_remove autotools-dev binutils ca-certificates-java cmake-data cpp fakeroot geoip-database icu-devtools ifupdown iproute2 isc-dhcp-client isc-dhcp-common java-common less libalgorithm-diff-perl libalgorithm-diff-xs-perl libalgorithm-merge-perl libarchive13 libass-dev libasyncns0 libatm1 libatomic1 libavcodec-dev libavfilter-dev libavformat-dev libavresample-dev libavutil-dev libboost-dev libbz2-dev libc-dev-bin libc6-dev libcdio-dev libcdio13 libcilkrts5 libcurl3 libcurl4-gnutls-dev libdpkg-perl libdrm-dev liberror-perl libexpat1-dev libfakeroot libfile-fcntllock-perl libflac8 libfontconfig1-dev libfreetype6-dev libfribidi-dev libgcrypt20-dev libgdbm3 libgeoip1 libgl1-mesa-dev libglew-dev libglu1-mesa-dev  libgnutls-openssl27 libgnutls28-dev  libgnutlsxx28 libgpg-error-dev libharfbuzz-dev libharfbuzz-gobject0 libharfbuzz-icu0 libicu-dev libidn11-dev  libiso9660-8 libiso9660-dev libitm1 libjasper-dev libjbig-dev libjpeg-dev libjson-c2 libjsoncpp1 liblcms2-2 liblsan0 libltdl-dev libltdl7 liblzma-dev liblzo2-dev libmicrohttpd-dev libmpc3 libmpeg2-4 libmpeg2-4-dev libmpfr4 libmysqlclient-dev libnfs-dev libnspr4 libnss3 libogg-dev libp11-kit-dev libpcre3-dev libpcsclite1 libpng12-dev libpostproc-dev libpthread-stubs0-dev libpulse0 libpython-dev libpython2.7-dev libquadmath0 libsctp1 libsigsegv2 libsmbclient-dev libsndfile1 libsqlite3-dev libssh-dev libswresample-dev libswscale-dev libtag1-dev libtasn1-6-dev libtasn1-doc libtiff5-dev libtiffxx5 libtinyxml-dev libtool libtsan0 libubsan0 libvorbis-dev libvorbisfile3 libwrap0 libx11-dev libx11-doc libx11-xcb-dev libxau-dev libxcb-dri2-0-dev libxcb-dri3-dev libxcb-glx0-dev libxcb-present-dev libxcb-randr0 libxcb-randr0-dev libxcb-render0 libxcb-render0-dev libxcb-shape0 libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0 libxcb-xfixes0-dev libxcb1-dev libxdamage-dev libxdmcp-dev libxext-dev libxfixes-dev libxml2-dev libxmuu1 libxrandr-dev libxrender-dev libxshmfence-dev libxslt1-dev libxxf86vm-dev libyajl-dev linux-libc-dev m4 make manpages manpages-dev mesa-common-dev netbase nettle-dev openjdk-7-jre-headless swig swig3.0 tcpd tzdata-java unzip uuid-dev x11proto-core-dev x11proto-damage-dev x11proto-dri2-dev x11proto-fixes-dev x11proto-gl-dev x11proto-input-dev x11proto-kb-dev x11proto-randr-dev x11proto-render-dev x11proto-xext-dev x11proto-xf86vidmode-dev xauth xorg-sgml-doctools xtrans-dev
+    apt_remove autotools-dev binutils ca-certificates-java cmake-data fakeroot geoip-database icu-devtools ifupdown iproute2 isc-dhcp-client isc-dhcp-common java-common less libalgorithm-diff-perl libalgorithm-diff-xs-perl libalgorithm-merge-perl libarchive13 libass-dev libasyncns0 libatm1 libatomic1 libavfilter-dev libavformat-dev libavresample-dev libavutil-dev libboost-dev libbz2-dev libc-dev-bin libc6-dev libcdio-dev libcdio13 libcilkrts5 libcurl3 libcurl4-gnutls-dev libdpkg-perl libdrm-dev liberror-perl libexpat1-dev libfakeroot libfile-fcntllock-perl libflac8 libfontconfig1-dev libfreetype6-dev libfribidi-dev libgcrypt20-dev libgdbm3 libgeoip1 libgl1-mesa-dev libglew-dev libglu1-mesa-dev  libgnutls-openssl27 libgnutls28-dev  libgnutlsxx28 libgpg-error-dev libharfbuzz-dev libharfbuzz-gobject0 libharfbuzz-icu0 libicu-dev libidn11-dev  libiso9660-8 libiso9660-dev libitm1 libjbig-dev libjpeg-dev libjsoncpp1 liblcms2-2 liblsan0 libltdl-dev libltdl7 liblzma-dev liblzo2-dev libmicrohttpd-dev libmpc3 libmpeg2-4 libmpeg2-4-dev libmpfr4 libmysqlclient-dev libnfs-dev libnspr4 libnss3 libogg-dev libp11-kit-dev libpcre3-dev libpcsclite1 libpng12-dev libpostproc-dev libpthread-stubs0-dev libpulse0 libpython-dev libpython2.7-dev libquadmath0 libsctp1 libsigsegv2 libsmbclient-dev libsndfile1 libsqlite3-dev libssh-dev libswresample-dev libswscale-dev libtag1-dev libtasn1-6-dev libtasn1-doc libtiff5-dev libtiffxx5 libtinyxml-dev libtool libtsan0 libubsan0 libvorbis-dev libvorbisfile3 libwrap0 libx11-dev libx11-doc libx11-xcb-dev libxau-dev libxcb-dri2-0-dev libxcb-dri3-dev libxcb-glx0-dev libxcb-present-dev libxcb-randr0 libxcb-randr0-dev libxcb-render0 libxcb-render0-dev libxcb-shape0 libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0 libxcb-xfixes0-dev libxcb1-dev libxdamage-dev libxdmcp-dev libxext-dev libxfixes-dev libxml2-dev libxmuu1 libxrandr-dev libxrender-dev libxshmfence-dev libxslt1-dev libxxf86vm-dev libyajl-dev linux-libc-dev m4 manpages manpages-dev mesa-common-dev netbase nettle-dev openjdk-7-jre-headless swig swig3.0 tcpd tzdata-java uuid-dev x11proto-core-dev x11proto-damage-dev x11proto-dri2-dev x11proto-fixes-dev x11proto-gl-dev x11proto-input-dev x11proto-kb-dev x11proto-randr-dev x11proto-render-dev x11proto-xext-dev x11proto-xf86vidmode-dev xauth xorg-sgml-doctools xtrans-dev
 fi
+
+## Runtime dependencies
+apt_install_permanent libssh-4 libmicrohttpd* libmysqlclient* liblzo2-2 libtiff5 libglu1-mesa libglew1.10 libpython2.7 libtinyxml* libyajl2 libxml2 libxslt1.1 libfribidi0 libpcrecpp* libfreetype6 libtag1* libxrandr2 libsmbclient libx264-* libvorbisenc2 libtheora0
