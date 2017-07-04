@@ -3,7 +3,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt_install() {
     apt-get update
-    apt-get install -y --no-install-recommends "$@"
+    apt-get install -y --allow-unauthenticated --no-install-recommends "$@"
 }
 
 apt_install_permanent() {
