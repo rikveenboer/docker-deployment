@@ -14,7 +14,7 @@ apt_install_permanent librsync-dev libsqlite3-dev libgnutls28-dev pkg-config
 ## Csync2
 cd /opt
 wget http://oss.linbit.com/csync2/csync2-$CSYNC_VERSION.tar.gz
-tar xzvf csync2-$CSYNC_VERSION.tar.gz
+tar xzf csync2-$CSYNC_VERSION.tar.gz
 cd csync2-$CSYNC_VERSION
 ./configure
 sed -i 's/\(verify_peername(\(const[^)]*\))\)/\1 {return 1;} int disabled(\2)/' daemon.c
