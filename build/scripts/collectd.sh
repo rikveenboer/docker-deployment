@@ -1,1 +1,1 @@
-apt_install_permanent libsensors4 collectd
+apt_install_permanent libsensors4 hddtemp collectd
