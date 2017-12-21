@@ -5,9 +5,12 @@ export_env LIGHTTPD_VERSION $LIGHTTPD_VERSION_MAJOR.$LIGHTTPD_VERSION_MINOR
 export_env LIGHTTPD_CONFIG /etc/lighttpd/lighttpd.conf
 export_env LIGHTTPD_LOG /host/var/log/lighttpd/error.log
 
+## Dependencies
+apt_install_permanent default-libmysqlclient-dev libpcre3-dev
+
 ## Lighthttpd
 apt_install_permanent lighttpd
-apt-get build-dep -y lighttpd
+# apt-get build-dep -y lighttpd
 apt_install_temporary automake
 cd /opt
 wget http://download.lighttpd.net/lighttpd/releases-$LIGHTTPD_VERSION_MAJOR.x/lighttpd-$LIGHTTPD_VERSION.tar.gz

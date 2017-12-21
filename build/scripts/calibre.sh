@@ -7,4 +7,4 @@ apt_install_permanent python-qt4 xz-utils xdg-utils imagemagick
 
 ## Calibre
 cd /opt
-PYTHONIOENCODING="utf-8" wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
+wget --no-check-certificate-nv -O- http://download.calibre-ebook.com/linux-installer.py | python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"

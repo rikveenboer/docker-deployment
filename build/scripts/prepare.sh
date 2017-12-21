@@ -35,8 +35,9 @@ ln -sf /bin/true /usr/bin/ischroot
 # https://github.com/docker/docker/issues/6345#issuecomment-49245365
 ln -sf /bin/true /usr/bin/chfn
 
-## Package management
-apt_install_permanent apt-transport-https apt-utils
+## Install HTTPS support for APT
+apt update
+apt_install_permanent apt-transport-https
 
 ## Upgrade all packages
 apt dist-upgrade -y --no-install-recommends
