@@ -1,5 +1,5 @@
 ## Configuration
-export_env BACKINTIME_VERSION 1.1.12
+export_env BACKINTIME_VERSION 1.1.20
 
 ## Dependencies
 apt_install_permanent gettext python3 python3-dbus
