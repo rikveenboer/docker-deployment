@@ -1,4 +1,4 @@
-FROM = debian:jessie
+FROM = debian:stretch
 MODE = minimal
 PROXY = $(shell hostname -i)
 TIMEZONE = Europe/London
