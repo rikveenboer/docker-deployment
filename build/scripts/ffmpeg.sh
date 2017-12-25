@@ -7,6 +7,10 @@ export_env SDK_URL https://www.dropbox.com/s/wel0xazy2c45pqe/$SDK_BASENAME.zip
 ## Dependencies
 apt_install_permanent sudo linux-libc-dev
 
+## Cuda
+echo 'deb http://deb.debian.org/debian stretch main contrib non-free' >> /etc/apt/sources.list
+apt_install_permanent libcuda1 libnvidia-encode1
+
 ## FFmpeg
 cd /opt
 git clone https://github.com/lutris/ffmpeg-nvenc.git
