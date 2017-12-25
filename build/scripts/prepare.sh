@@ -15,9 +15,9 @@ echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/02apt-speedup
 export_env INITRD no
 
 # Enable sources and backports in APT
-echo 'deb-src http://httpredir.debian.org/debian/ stretch main' >> /etc/apt/sources.list
-echo 'deb http://httpredir.debian.org/debian/ stretch-backports main contrib non-free' >> /etc/apt/sources.list
-echo 'deb-src http://httpredir.debian.org/debian/ stretch-backports main contrib non-free' >> /etc/apt/sources.list
+echo "deb-src http://deb.debian.org/debian/ $DEBIAN main" >> /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian/ $DEBIAN-backports main contrib non-free" >> /etc/apt/sources.list
+echo "deb-src http://deb.debian.org/debian/ $DEBIAN-backports main contrib non-free" >> /etc/apt/sources.list
 
 ## Fix some issues with APT packages
 # See https://github.com/dotcloud/docker/issues/1024

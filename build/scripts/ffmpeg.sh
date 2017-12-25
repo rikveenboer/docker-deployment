@@ -8,7 +8,7 @@ export_env SDK_URL https://www.dropbox.com/s/wel0xazy2c45pqe/$SDK_BASENAME.zip
 apt_install_permanent sudo linux-libc-dev
 
 ## Cuda
-echo 'deb http://deb.debian.org/debian stretch main contrib non-free' >> /etc/apt/sources.list
+echo 'deb http://deb.debian.org/debian $DEBIAN main contrib non-free' >> /etc/apt/sources.list
 apt_install_permanent libcuda1 libnvidia-encode1
 
 ## FFmpeg

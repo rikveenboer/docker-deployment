@@ -1,4 +1,5 @@
-FROM = debian:stretch
+DEBIAN = stretch
+FROM = debian:$(DEBIAN)
 MODE = minimal
 PROXY = $(shell hostname -i)
 TIMEZONE = Europe/London
@@ -58,6 +59,9 @@ prepare:
 	@echo FROM $(FROM) > ${FILE}
 ifneq ($(PROXY),)
 	$(call arg,http_proxy,http://$(PROXY):3142)
+endif
+ifneq ($(DEBIAN),)
+	$(call arg,DEBIAN,$(DEBIAN))
 endif
 ifneq ($(TIMEZONE),)
 	$(call arg,TIMEZONE,$(TIMEZONE))
