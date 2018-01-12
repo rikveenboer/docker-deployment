@@ -1,7 +1,7 @@
 DEBIAN = stretch
 FROM = debian:$(DEBIAN)
 MODE = minimal
-PROXY = $(shell hostname -i)
+PROXY = $(shell hostname -I | cut -d' ' -f1)
 TIMEZONE = Europe/London
 JOBS = 2
 CLEANUP = true
