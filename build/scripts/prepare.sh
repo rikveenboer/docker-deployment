@@ -45,3 +45,6 @@ apt dist-upgrade -y --no-install-recommends
 ## Set timezone
 echo $TIMEZONE > /etc/timezone
 dpkg-reconfigure -f noninteractive tzdata
+
+## Store debian
+export_env DEBIAN $DEBIAN
