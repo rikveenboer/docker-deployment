@@ -1,0 +1,3 @@
+#!/bin/bash
+set -e
+mono /opt/radarr/Radarr.exe --no-browser -data=$RADARR_DATA > /dev/null
