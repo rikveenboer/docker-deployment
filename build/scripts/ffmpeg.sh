@@ -4,11 +4,15 @@ export_env SDK_VERSION 8.0.14
 export_env SDK_BASENAME Video_Codec_SDK_$SDK_VERSION
 export_env SDK_URL https://www.dropbox.com/s/wel0xazy2c45pqe/$SDK_BASENAME.zip
 
+
+## Sources
+echo "deb http://deb.debian.org/debian $DEBIAN main contrib non-free" > /etc/apt/sources.list
+apt update
+
 ## Dependencies
-apt_install_permanent sudo linux-libc-dev
+apt_install_permanent sudo linux-libc-dev libvlc-bin
 
 ## Cuda
-echo "deb http://deb.debian.org/debian $DEBIAN main contrib non-free" >> /etc/apt/sources.list
 apt_install_permanent libcuda1 libnvidia-encode1
 
 ## FFmpeg
