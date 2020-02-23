@@ -1,9 +1,10 @@
 ## Configuration
-export_env FACETTE_VERSION 0.4.0
-export_env FACETTE_PACKAGE facette_${FACETTE_VERSION}_$DEBIAN-amd64.deb
+export_env FACETTE_VERSION 0.5.1
+export_env UBUNTU bionic
+export_env FACETTE_PACKAGE facette_${FACETTE_VERSION}_$UBUNTU-amd64.deb
 
 ## Dependencies
-apt_install_permanent librrd8 mime-support
+apt_install_permanent librrd8 mime-support daemon
 
 ## Facette
 cd /opt
