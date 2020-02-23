@@ -1,4 +1,4 @@
-DEBIAN = stretch
+DEBIAN = buster
 FROM = debian:$(DEBIAN)
 MODE = minimal
 PROXY = $(shell hostname -I | cut -d' ' -f1)
