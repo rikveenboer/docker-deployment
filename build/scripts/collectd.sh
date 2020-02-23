@@ -1,3 +1,3 @@
-apt_install_permanent libsensors4 hddtemp collectd
+apt_install_permanent libsensors5 hddtemp collectd
 
 pip install requests
