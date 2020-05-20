@@ -1,4 +1,4 @@
-apt_install_permanent libsensors5 liblzo2-2 hddtemp collectd sudo btrfs-progs
+apt_install_permanent libsensors5 liblzo2-2 hddtemp collectd sudo btrfs-progs libatasmart4
 
 pip install requests
 
