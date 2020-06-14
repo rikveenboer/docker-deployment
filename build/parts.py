@@ -41,7 +41,7 @@ for part in parts:
         partfile = '{}_{}.sh'.format(file, i)
         path = '{}/build/parts/{}'.format(os.environ['DOCKER_HOME'], partfile)
         open(path, 'w').write(contents)
-        os.chmod(path, 0o100)
+        os.chmod(path, 0o700)
 
         # Append to Dockerfile
         docker.write('ADD parts/{} {}/{}\n'.format(partfile, tmp, partfile))
