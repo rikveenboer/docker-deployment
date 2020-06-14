@@ -15,4 +15,11 @@ cd pylikwid
 python setup.py build_ext
 python setup.py install
 
+apt_install_temporary -y collectd-dev
+git clone https://github.com/n-st/collectd-plugin-intel_cpu_energy.git collectd-energy
+cd collectd-energy
+sed -i 's/ssnprintf/vsnprintf/' intel_cpu_energy.c
+make
+make install
+
 export_env LD_LIBRARY_PATH /usr/local/lib
