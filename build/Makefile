@@ -1,11 +1,11 @@
 DEBIAN = buster
 FROM = debian:$(DEBIAN)
 MODE = minimal
-PROXY = $(shell hostname -I | cut -d' ' -f1)
-TIMEZONE = Europe/London
+PROXY = #$(shell hostname -I | cut -d' ' -f1)
+TIMEZONE = Europe/Amsterdam
 JOBS = 2
 CLEANUP = true
-ARGS = --rm=false --no-cache=false
+ARGS = --rm=false --no-cache
 
 include $(wildcard $(DOCKER_HOME)/config.mk)
 include $(wildcard $(DOCKER_HOME)/build/make/*.mk)
